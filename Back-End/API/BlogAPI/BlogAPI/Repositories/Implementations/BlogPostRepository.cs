@@ -9,11 +9,12 @@ namespace BlogAPI.Repositories.Implementations
         private readonly ApplicationDbContext _context;
         public BlogPostRepository(ApplicationDbContext context) {
             _context = context;
-        } 
+        }
         public async Task<BlogPost> GetBlogPostWithComments(Guid id)
         {
-            return await _context.BlogPosts.Include(bp => bp.Comments).FirstOrDefaultAsync(bp => bp.Id == id);
-           
+            return await _context.BlogPosts
+                .Include(bp => bp.Comments)
+                .FirstOrDefaultAsync(bp => bp.Id == id);
         }
     }
 }
