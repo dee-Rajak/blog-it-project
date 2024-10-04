@@ -1,0 +1,6 @@
+@BlogItAPI_HostAddress = http://localhost:5105
+
+GET {{BlogItAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
