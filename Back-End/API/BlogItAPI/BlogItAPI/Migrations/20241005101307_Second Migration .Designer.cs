@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241005053122_one to many relationship between category and blogpost")]
-    partial class onetomanyrelationshipbetweencategoryandblogpost
+    [Migration("20241005101307_Second Migration ")]
+    partial class SecondMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -30,7 +30,7 @@ namespace BlogItAPI.Repositories.Implementations
 
         public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
         {
-            return await _context.BlogPosts.Include(b => b.Author).ToListAsync();
+            return await _context.BlogPosts.Include(b => b.Author).Include(b=>b.Comments).ToListAsync();
         }
 
         public async Task<BlogPost> GetBlogPostByIdAsync(int id)

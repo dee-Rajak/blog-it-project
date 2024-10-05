@@ -20,7 +20,7 @@ namespace BlogItAPI.Models
         public int BlogPostId { get; set; }
 
         [JsonIgnore]
-        public BlogPost BlogPost { get; set; }
+        public BlogPost? BlogPost { get; set; } 
 
     }
 }

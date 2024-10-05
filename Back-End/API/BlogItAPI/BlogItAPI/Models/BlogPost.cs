@@ -24,6 +24,8 @@ namespace BlogItAPI.Models
 
         public DateTime UpdatedDate { get; set; }
 
+        public string? FeaturedImageUrl { get; set; }
+
         public int Likes { get; set; }
 
         [ForeignKey("Authors")]
@@ -32,7 +34,7 @@ namespace BlogItAPI.Models
         [JsonIgnore]
         public Author? Author { get; set; }
 
-        [JsonIgnore]
+        
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
         [ForeignKey("Cateogry")]
