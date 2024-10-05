@@ -6,6 +6,7 @@ namespace BlogItAPI.Repositories.Interfaces
     {
         Task<IEnumerable<Author>> GetAllAuthorsAsync();
 
+        Task<IEnumerable<BlogPost>> GetBlogPostsByAuthorIdAsync(int id);
         Task<Author> GetAuthorByIdAsync(int id);
 
         Task AddAuthorAsync(Author author);

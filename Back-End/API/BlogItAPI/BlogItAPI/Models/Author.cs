@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace BlogItAPI.Models
 {
@@ -16,6 +17,8 @@ namespace BlogItAPI.Models
         [Required]
         [StringLength(100)] 
         public string Email { get; set; }
+
+        [JsonIgnore]
         public ICollection<BlogPost> BlogPosts { get; set; } = new List<BlogPost>();
     }
 }

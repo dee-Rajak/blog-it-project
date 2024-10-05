@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241004140629_First migration with int ids")]
-    partial class Firstmigrationwithintids
+    [Migration("20241005053122_one to many relationship between category and blogpost")]
+    partial class onetomanyrelationshipbetweencategoryandblogpost
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,6 +59,9 @@ namespace BlogItAPI.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -84,6 +87,8 @@ namespace BlogItAPI.Migrations
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("BlogPosts");
                 });
 
@@ -96,13 +101,10 @@ namespace BlogItAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -134,21 +136,6 @@ namespace BlogItAPI.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("BlogPostCategory", b =>
-                {
-                    b.Property<int>("BlogPostsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BlogPostsId", "CategoriesId");
-
-                    b.HasIndex("CategoriesId");
-
-                    b.ToTable("BlogPostCategories", (string)null);
-                });
-
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>
                 {
                     b.HasOne("BlogItAPI.Models.Author", "Author")
@@ -157,7 +144,15 @@ namespace BlogItAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BlogItAPI.Models.Category", "Category")
+                        .WithMany("BlogPosts")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.Comment", b =>
@@ -171,21 +166,6 @@ namespace BlogItAPI.Migrations
                     b.Navigation("BlogPost");
                 });
 
-            modelBuilder.Entity("BlogPostCategory", b =>
-                {
-                    b.HasOne("BlogItAPI.Models.BlogPost", null)
-                        .WithMany()
-                        .HasForeignKey("BlogPostsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BlogItAPI.Models.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("BlogItAPI.Models.Author", b =>
                 {
                     b.Navigation("BlogPosts");
@@ -194,6 +174,11 @@ namespace BlogItAPI.Migrations
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("BlogItAPI.Models.Category", b =>
+                {
+                    b.Navigation("BlogPosts");
                 });
 #pragma warning restore 612, 618
         }

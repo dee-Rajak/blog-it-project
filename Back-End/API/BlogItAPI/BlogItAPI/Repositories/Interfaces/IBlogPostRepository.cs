@@ -6,6 +6,7 @@ namespace BlogItAPI.Repositories.Interfaces
     {
         Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync();
 
+      
         Task<BlogPost> GetBlogPostByIdAsync(int id);
 
         Task AddBlogPostAsync(BlogPost blogPost);

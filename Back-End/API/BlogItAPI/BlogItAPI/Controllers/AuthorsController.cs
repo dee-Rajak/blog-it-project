@@ -10,6 +10,7 @@ namespace BlogItAPI.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorRepository _authorRepository;
+        
 
         public AuthorsController(IAuthorRepository authorRepository)
         {
@@ -63,5 +64,18 @@ namespace BlogItAPI.Controllers
             return NoContent();
         }
 
+
+        [HttpGet("by-author/{authorId}")]
+        public async Task<IActionResult> GetBlogPostByAuthorId(int authorId)
+        {
+            var blogPosts = await _authorRepository.GetBlogPostsByAuthorIdAsync(authorId);
+
+            if(blogPosts == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(blogPosts);
+        }
     }
 }

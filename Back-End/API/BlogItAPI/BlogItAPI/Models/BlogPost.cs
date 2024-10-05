@@ -28,11 +28,17 @@ namespace BlogItAPI.Models
 
         [ForeignKey("Authors")]
         public int AuthorId { get; set; }
+
+        [JsonIgnore]
         public Author? Author { get; set; }
 
+        [JsonIgnore]
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-        public ICollection<Category> Categories { get; set; } = new List<Category>();
+        [ForeignKey("Cateogry")]
+        public int CategoryId { get; set; }
+        [JsonIgnore]
+        public Category? Category { get; set; }
 
         
 

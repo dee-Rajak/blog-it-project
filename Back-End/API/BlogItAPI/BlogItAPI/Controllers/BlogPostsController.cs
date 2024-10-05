@@ -1,8 +1,10 @@
-﻿using BlogItAPI.Models;
+﻿using BlogItAPI.Data;
+using BlogItAPI.Models;
 using BlogItAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
 namespace BlogItAPI.Controllers
@@ -12,10 +14,12 @@ namespace BlogItAPI.Controllers
     public class BlogPostsController : ControllerBase
     {
         private readonly IBlogPostRepository _blogPostRepository;
+        private readonly AppDbContext _context;
 
-        public BlogPostsController(IBlogPostRepository blogPostRepository)
+        public BlogPostsController(IBlogPostRepository blogPostRepository,AppDbContext context)
         {
             _blogPostRepository = blogPostRepository;
+            _context = context;
         }
 
         [HttpGet]
@@ -42,6 +46,7 @@ namespace BlogItAPI.Controllers
         public async Task<IActionResult> CreateBlogPost(BlogPost blogPost)
         {
             await _blogPostRepository.AddBlogPostAsync(blogPost);
+            await _context.SaveChangesAsync();  
             return CreatedAtAction(nameof(GetBlogPostById), new { id = blogPost.Id }, blogPost);
         }
 

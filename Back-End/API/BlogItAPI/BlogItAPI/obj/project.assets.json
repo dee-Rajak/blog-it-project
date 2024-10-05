@@ -4547,11 +4547,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\b2001\\OneDrive\\Desktop\\.NET\\ProjectAPI\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
+      "projectUniqueName": "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
       "projectName": "BlogItAPI",
-      "projectPath": "C:\\Users\\b2001\\OneDrive\\Desktop\\.NET\\ProjectAPI\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
+      "projectPath": "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
       "packagesPath": "C:\\Users\\b2001\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\b2001\\OneDrive\\Desktop\\.NET\\ProjectAPI\\BlogItAPI\\BlogItAPI\\obj\\",
+      "outputPath": "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

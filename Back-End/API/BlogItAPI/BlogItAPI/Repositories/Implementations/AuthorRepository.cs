@@ -33,12 +33,17 @@ namespace BlogItAPI.Repositories.Implementations
 
         public async Task<IEnumerable<Author>> GetAllAuthorsAsync()
         {
-            return await _context.Authors.ToListAsync();
+            return await _context.Authors.Include(x=>x.BlogPosts).ToListAsync();
         }
 
         public async Task<Author> GetAuthorByIdAsync(int id)
         {
             return await _context.Authors.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetBlogPostsByAuthorIdAsync(int authorId)
+        {
+            return await _context.BlogPosts.Where(bp => bp.AuthorId == authorId).ToListAsync();
         }
 
         public async Task UpdateAuthorAsync(Author author)

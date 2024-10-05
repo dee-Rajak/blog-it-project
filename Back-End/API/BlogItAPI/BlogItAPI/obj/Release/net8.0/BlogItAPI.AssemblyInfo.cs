@@ -12,9 +12,9 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlogItAPI")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee8265d8accea8aafea283e0b902126c5e50b060")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62ff41d5b05e6c273fc472c269317fc30a31ffe2")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlogItAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlogItAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
