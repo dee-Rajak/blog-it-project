@@ -17,9 +17,9 @@ namespace BlogItAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategories()
+        public async Task<IActionResult> GetCategories([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
         {
-            var categories = await _categorRepository.GetCategoriesAsync();
+            var categories = await _categorRepository.GetCategoriesAsync(query,sortBy,sortDirection,pageNumber,pageSize);
             return Ok(categories);
         }
 

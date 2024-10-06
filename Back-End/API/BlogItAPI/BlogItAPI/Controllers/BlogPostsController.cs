@@ -24,9 +24,9 @@ namespace BlogItAPI.Controllers
 
         [HttpGet]
 
-        public async Task<IActionResult> GetBlogPosts()
+        public async Task<IActionResult> GetBlogPosts([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
         {
-            var blogPosts = await _blogPostRepository.GetAllBlogPostsAsync();
+            var blogPosts = await _blogPostRepository.GetAllBlogPostsAsync(query, sortBy, sortDirection, pageNumber,pageSize);
             return Ok(blogPosts);
         }
 

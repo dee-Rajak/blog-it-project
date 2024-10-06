@@ -28,9 +28,47 @@ namespace BlogItAPI.Repositories.Implementations
             }
         }
 
-        public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync()
+        public async Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync(string? query, string? sortBy, string? sortDirection, int? pageNumber = 1, int? pageSize = 10)
         {
-            return await _context.BlogPosts.Include(b => b.Author).Include(b=>b.Comments).ToListAsync();
+            //searching
+            var blogPosts = _context.BlogPosts.AsQueryable();
+
+            if(string.IsNullOrEmpty(query)==false)
+            {
+                blogPosts = _context.BlogPosts.Where(x => x.Title.Contains(query));
+            }
+
+
+            //sorting
+
+            if(string.IsNullOrEmpty(sortBy)==false)
+            {
+                if(string.Equals(sortBy,"Title",StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection,"Asc",StringComparison.OrdinalIgnoreCase) ? true : false;
+
+                    blogPosts = isAsc? blogPosts.OrderBy(x=>x.Title) : blogPosts.OrderByDescending(x=>x.Title);                 
+                }
+
+                if(string.Equals(sortBy,"Likes",StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection,"Asc",StringComparison.OrdinalIgnoreCase) ? true : false;
+                    blogPosts = isAsc? blogPosts.OrderBy(x=>x.Likes) : blogPosts.OrderByDescending(x=>x.Likes);
+                }
+
+                if(string.Equals(sortBy, "CreatedDate", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection, "Asc", StringComparison.OrdinalIgnoreCase) ? true : false;
+                    blogPosts = isAsc ? blogPosts.OrderBy(x => x.CreatedDate) : blogPosts.OrderByDescending(x => x.CreatedDate);
+                }
+            }
+
+            //pagination 
+            var skipResults = (pageNumber - 1) * pageSize;
+
+            blogPosts = blogPosts.Skip(skipResults ?? 0).Take(pageSize ?? 10);
+
+            return await blogPosts.Include(b => b.Author).Include(b=>b.Comments).ToListAsync();
         }
 
         public async Task<BlogPost> GetBlogPostByIdAsync(int id)

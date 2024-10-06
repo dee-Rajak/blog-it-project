@@ -4,7 +4,7 @@ namespace BlogItAPI.Repositories.Interfaces
 {
     public interface IBlogPostRepository
     {
-        Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync();
+        Task<IEnumerable<BlogPost>> GetAllBlogPostsAsync(string? query, string? sortBy, string? sortDirection,int? pageNumber = 1, int? pageSize = 10);
 
       
         Task<BlogPost> GetBlogPostByIdAsync(int id);

@@ -1,6 +1,7 @@
 ﻿using BlogItAPI.Data;
 using BlogItAPI.Models;
 using BlogItAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogItAPI.Repositories.Implementations
@@ -29,9 +30,43 @@ namespace BlogItAPI.Repositories.Implementations
             }
         }
 
-        public async Task<IEnumerable<Category>> GetCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync(string? query = null, string? sortBy = null, string? sortDirection = null, int? pageNumber = 1, int? pageSize = 5)
         {
-            return await _context.Categories.ToListAsync();
+            //Query
+          var categories =   _context.Categories.AsQueryable();
+
+
+            //Filtering 
+
+            if(string.IsNullOrWhiteSpace(query)==false)
+            {
+                categories = categories.Where(x=>x.Name.Contains(query));
+            }
+
+
+            //Sorting 
+            if(string.IsNullOrWhiteSpace(sortBy) ==false)
+            {
+                if(string.Equals(sortBy,"Name",StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase) ? true : false;
+
+                    categories = isAsc ? categories.OrderBy(x => x.Name) : categories.OrderByDescending(x => x.Name);
+                }
+            }
+
+            //Pagination 
+
+            var skipResult = (pageNumber - 1) * pageSize;
+
+            categories = categories.Skip(skipResult?? 0).Take(pageSize?? 1);
+
+
+
+
+            return await categories.ToListAsync();
+
+            //return await _context.Categories.ToListAsync();
         }
 
         public async Task<Category> GetCategoryByIdAsync(int id)
