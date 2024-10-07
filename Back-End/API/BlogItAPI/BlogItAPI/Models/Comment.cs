@@ -19,6 +19,9 @@ namespace BlogItAPI.Models
         [ForeignKey("BlogPost")]
         public int BlogPostId { get; set; }
 
+        [ForeignKey("Comments")]
+        public int CommentAuthorId { get; set; }
+
         [JsonIgnore]
         public BlogPost? BlogPost { get; set; } 
 

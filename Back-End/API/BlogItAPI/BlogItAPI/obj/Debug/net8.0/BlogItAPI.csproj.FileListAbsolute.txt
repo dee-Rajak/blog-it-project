@@ -273,3 +273,5 @@ C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\B
 C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\obj\Debug\net8.0\BlogItAPI.pdb
 C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\obj\Debug\net8.0\BlogItAPI.genruntimeconfig.cache
 C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\obj\Debug\net8.0\ref\BlogItAPI.dll
+C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\BouncyCastle.Crypto.dll

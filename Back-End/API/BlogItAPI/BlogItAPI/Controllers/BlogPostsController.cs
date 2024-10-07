@@ -1,14 +1,18 @@
 ﻿using BlogItAPI.Data;
 using BlogItAPI.Models;
 using BlogItAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace BlogItAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class BlogPostsController : ControllerBase
@@ -41,15 +45,22 @@ namespace BlogItAPI.Controllers
             }
             return Ok(blogPosts);
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateBlogPost(BlogPost blogPost)
         {
+            var authorIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (authorIdClaim == null || !int.TryParse(authorIdClaim.Value, out var authorId))
+            {
+                return Unauthorized("Author not found.");
+            }
+            blogPost.AuthorId = authorId;
             await _blogPostRepository.AddBlogPostAsync(blogPost);
             await _context.SaveChangesAsync();  
             return CreatedAtAction(nameof(GetBlogPostById), new { id = blogPost.Id }, blogPost);
+        
         }
-
+        [Authorize]
         [HttpPut("{id}")]
 
         public async Task<IActionResult> UpdateBlogPost(int id, BlogPost blogPost)
@@ -61,14 +72,14 @@ namespace BlogItAPI.Controllers
             await _blogPostRepository.UpdateBlogPostAsync(blogPost);
             return NoContent();
         }
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost(int id)
         {
             await _blogPostRepository.DeleteBlogPostAsync(id);
             return NoContent();
         }
-
+        [Authorize]
         [HttpPost("{id}/like")]
 
         public async Task<IActionResult> LikePost(int id)

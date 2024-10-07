@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241005103207_Third Migration")]
-    partial class ThirdMigration
+    [Migration("20241007123829_Second Migration")]
+    partial class SecondMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,10 @@ namespace BlogItAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -122,7 +126,13 @@ namespace BlogItAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("BlogPostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentAuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -133,6 +143,8 @@ namespace BlogItAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("BlogPostId");
 
@@ -160,6 +172,10 @@ namespace BlogItAPI.Migrations
 
             modelBuilder.Entity("BlogItAPI.Models.Comment", b =>
                 {
+                    b.HasOne("BlogItAPI.Models.Author", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")
                         .WithMany("Comments")
                         .HasForeignKey("BlogPostId")
@@ -172,6 +188,8 @@ namespace BlogItAPI.Migrations
             modelBuilder.Entity("BlogItAPI.Models.Author", b =>
                 {
                     b.Navigation("BlogPosts");
+
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>

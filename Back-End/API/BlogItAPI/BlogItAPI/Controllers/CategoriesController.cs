@@ -22,7 +22,7 @@ namespace BlogItAPI.Controllers
             var categories = await _categorRepository.GetCategoriesAsync(query,sortBy,sortDirection,pageNumber,pageSize);
             return Ok(categories);
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> AddCategory(Category category)
         {

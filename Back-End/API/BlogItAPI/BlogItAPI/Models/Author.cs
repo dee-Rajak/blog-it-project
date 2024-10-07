@@ -18,7 +18,12 @@ namespace BlogItAPI.Models
         [StringLength(100)] 
         public string Email { get; set; }
 
+        public string Password { get; set; }
+
         [JsonIgnore]
         public ICollection<BlogPost> BlogPosts { get; set; } = new List<BlogPost>();
+
+        [JsonIgnore]
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
