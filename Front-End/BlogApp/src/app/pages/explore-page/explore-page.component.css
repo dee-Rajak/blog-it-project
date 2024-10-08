@@ -1,0 +1,62 @@
+.fixed-image-container {
+  height: 200px;  /* Fixed height for the container */
+  width: 100%;    /* Ensure the container takes full width of the column */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.fixed-image-container img {
+  width: 100%;    /* Scale image to fit the container width */
+  height: 100%;   /* Scale image to fit the container height */
+  object-fit: fill; /* Ensure the image covers the container without distortion */
+}
+
+.card {
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #233d4d;
+  width: 60%;
+  
+  /* border-radius: 20px; */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.floating-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #d5ece5;
+  border: 1px solid #233d4d;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 85%;
+  max-width: 70%;
+  padding: 20px;
+  height: 75%; /* Set a fixed height */
+  overflow: auto; /* Enable scrolling */
+}
+
+.card-body {
+  display: flex;
+  align-items: center;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.card-subtitle {
+  margin: 0;
+}
+
+.card-text {
+  margin: 10px 0;
+}

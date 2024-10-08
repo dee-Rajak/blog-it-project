@@ -1,0 +1,62 @@
+<!-- blog-card.component.html -->
+<div class="search-section">
+  <input type="text" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
+  
+  <div class="filter-controls">
+    <button (click)="toggleSortDirection()">
+      Sort: {{ sortDirection === 'Asc' ? 'Ascending' : 'Descending' }}
+    </button>
+    
+    <select [(ngModel)]="sortBy" (change)="searchBlogs()">
+      <option value="CreatedDate">Created Date</option>
+      <option value="Likes">Likes</option>
+      <option value="Title">Title</option>
+    </select>
+  </div>
+</div>
+
+<div class="card" *ngFor="let blog of blogList" (click)="showContent(blog)">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4 fized-image-container">
+                <div>
+                    <img [src]="blog.FeaturedImageUrl" class="img-fluid" alt="Featured Image">
+                </div>
+            </div>
+            <div class="col-8">
+                <h5 class="card-title display-5">{{ blog.Title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ blog.AuthorName }}</h6>
+                <p class="card-text">{{ blog.Description }}</p>
+                <p class="card-text">Likes: {{ blog.Likes }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="pagination-controls">
+  <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
+  <span>Page {{ pageNumber }}</span>
+  <button (click)="nextPage()" [disabled]="!hasMoreBlogs()">Next</button>
+</div>
+
+<div class="floating-card" *ngIf="selectedBlog">
+    <div class="card-body">
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-dark" (click)="closeContent()"><i class="bi bi-x"></i></button>
+        </div>
+        <div>
+            <h5 class=" mb-2 card-title display-5">{{ selectedBlog.Title }}</h5>
+        </div>
+        <div>
+            <h6 class="card-subtitle mb-2 text-muted">{{ selectedBlog.AuthorName }}</h6>
+        </div>
+    </div>
+    <div>
+        <!-- <p class="card-text" [innerHTML]="selectedBlog.Content | lineBreak"></p> -->
+         <markdown [data]="selectedBlog.Content"></markdown>
+         <!-- <markdown [data]="blogForm.get('content')?.value"></markdown> -->
+
+    </div>
+</div>
