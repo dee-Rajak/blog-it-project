@@ -50,7 +50,7 @@ namespace BlogItAPI.Controllers
             }
 
             var token = GenerateJwtToken(loggingAuthor);
-            return Ok(new {Token= token});
+            return Ok(new {Token= token, Id = loggingAuthor.Id, Name = loggingAuthor.Name});
         }
 
         private object GenerateJwtToken(Author author)
