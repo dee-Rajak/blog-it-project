@@ -7,14 +7,30 @@ import { Blog, BlogData } from '../models/blog.model';
 })
 export class BlogService {
 
-  constructor(private http: HttpClient) { }
+  private apiUrl = 'https://localhost:7189/api/BlogPosts';
 
-  createBlog(blog: Blog){
-    // const token = localStorage.getItem('token');
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<Blog>("https://localhost:7189/api/BlogPosts", blog);
+  constructor(private http: HttpClient) {}
+
+  addBlog(blog: Blog){
+    return this.http.post<Blog>(this.apiUrl, blog);
   }
-  getBlogs(){
-    return this.http.get<BlogData[]>("https://localhost:7189/api/BlogPosts");
+
+  updateBlog(id: number, blog: Blog){
+    debugger;
+    return this.http.put<Blog>(`${this.apiUrl}/${id}`, blog);
   }
+
+  deleteBlog(id: number){
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+
+  // createBlog(blog: Blog){
+  //   // const token = localStorage.getItem('token');
+  //   // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  //   return this.http.post<Blog>("https://localhost:7189/api/BlogPosts", blog);
+  // }
+  // getBlogs(){
+  //   return this.http.get<BlogData[]>("https://localhost:7189/api/BlogPosts");
+  // }
 }

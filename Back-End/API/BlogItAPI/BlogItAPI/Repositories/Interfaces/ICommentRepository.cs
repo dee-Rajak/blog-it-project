@@ -8,6 +8,8 @@ namespace BlogItAPI.Repositories.Interfaces
 
         Task<Comment> GetCommentByIdAsync(int id);
 
+        Task<IEnumerable<Comment>> GetCommentsByBlogPostId(int? blogPlostId);
+
         Task AddCommentAsync(Comment comment);
 
         Task UpdateCommentAsync(Comment comment);

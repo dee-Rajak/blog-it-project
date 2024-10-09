@@ -26,7 +26,6 @@ namespace BlogItAPI.Controllers
         }
 
         [HttpGet("{id}")]
-
         public async Task<IActionResult> GetCommentById(int id)
         {
             var comment = await _commentRepository.GetCommentByIdAsync(id);
@@ -36,10 +35,23 @@ namespace BlogItAPI.Controllers
             }
             return Ok(comment); 
         }
+
+        [HttpGet("GetCommentsByBlogId/{id}")]
+        public async Task<IActionResult> GetCommentsByBlogPostId(int? id)
+        {
+            var comment = await _commentRepository.GetCommentsByBlogPostId(id);
+            if (comment == null)
+            {
+                return NotFound();
+            }
+            return Ok(comment);
+        }
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateComment(Comment comment)
         {
+            comment.CreadtedDate = DateTime.Now;
             await _commentRepository.AddCommentAsync(comment);
             return CreatedAtAction(nameof(GetCommentById), new { id = comment.Id }, comment);
         }

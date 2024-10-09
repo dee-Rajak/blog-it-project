@@ -22,4 +22,10 @@ export class HeaderComponent implements OnInit{
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
+
+  logout() {
+    this.authService.logout();
+    this.username = null;
+    this.router.navigateByUrl('home/explore');
+  }
 }

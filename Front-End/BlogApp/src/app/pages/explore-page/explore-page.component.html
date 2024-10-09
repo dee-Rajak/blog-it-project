@@ -1,18 +1,18 @@
 <!-- blog-card.component.html -->
 <div class="search-section">
-  <input type="text" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
-  
-  <div class="filter-controls">
-    <button (click)="toggleSortDirection()">
-      Sort: {{ sortDirection === 'Asc' ? 'Ascending' : 'Descending' }}
-    </button>
-    
-    <select [(ngModel)]="sortBy" (change)="searchBlogs()">
-      <option value="CreatedDate">Created Date</option>
-      <option value="Likes">Likes</option>
-      <option value="Title">Title</option>
-    </select>
-  </div>
+    <input type="text" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
+
+    <div class="filter-controls">
+        <button (click)="toggleSortDirection()">
+            Sort: {{ sortDirection === 'Asc' ? 'Ascending' : 'Descending' }}
+        </button>
+
+        <select [(ngModel)]="sortBy" (change)="searchBlogs()">
+            <option value="CreatedDate">Created Date</option>
+            <option value="Likes">Likes</option>
+            <option value="Title">Title</option>
+        </select>
+    </div>
 </div>
 
 <div class="card" *ngFor="let blog of blogList" (click)="showContent(blog)">
@@ -35,9 +35,9 @@
 
 
 <div class="pagination-controls">
-  <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
-  <span>Page {{ pageNumber }}</span>
-  <button (click)="nextPage()" [disabled]="!hasMoreBlogs()">Next</button>
+    <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
+    <span>Page {{ pageNumber }}</span>
+    <button (click)="nextPage()" [disabled]="!hasMoreBlogs()">Next</button>
 </div>
 
 <div class="floating-card" *ngIf="selectedBlog">
@@ -55,8 +55,9 @@
     </div>
     <div>
         <!-- <p class="card-text" [innerHTML]="selectedBlog.Content | lineBreak"></p> -->
-         <markdown [data]="selectedBlog.Content"></markdown>
-         <!-- <markdown [data]="blogForm.get('content')?.value"></markdown> -->
+        <markdown [data]="selectedBlog.Content"></markdown>
+        <!-- <markdown [data]="blogForm.get('content')?.value"></markdown> -->
 
     </div>
+    <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
 </div>

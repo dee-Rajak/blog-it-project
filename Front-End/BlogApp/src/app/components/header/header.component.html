@@ -4,7 +4,10 @@
         <h1 class="display-1 text-white">BlogIt!</h1>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
-        <button class="p-3 btn btn-dark rounded-pill" *ngIf="!username" (click)="navigateToLogin()">Register/Login</button>
-    <span *ngIf="username" class="p-3 text-white">Welcome, {{ username }}</span>
+        <button class="p-3 btn btn-dark rounded-pill" *ngIf="!username"
+            (click)="navigateToLogin()">Register/Login</button>
+        <span *ngIf="username" class="p-3 text-white">Welcome, {{ username }}</span>
+        <button *ngIf="username" class="p-3 btn btn-dark rounded-pill" (click)="logout()">Logout</button>
+
     </div>
 </div>

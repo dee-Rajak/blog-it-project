@@ -18,6 +18,12 @@ namespace BlogItAPI.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<BlogPost>> GetBlogPostByAuthorId(int? authorId)
+        {
+
+            return await _context.BlogPosts.Where(c => c.AuthorId == authorId).ToListAsync();
+        }
+
         public async Task DeleteBlogPostAsync(int id)
         {
             var blogPost = await GetBlogPostByIdAsync(id);

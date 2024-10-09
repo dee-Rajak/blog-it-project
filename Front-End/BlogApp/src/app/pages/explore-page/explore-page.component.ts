@@ -6,12 +6,14 @@ import { MarkdownModule } from 'ngx-markdown';
 import { AuthorService } from '../../services/author.service';
 import { BlogData } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { CommentComponent } from '../../components/comment/comment.component';
 
 @Component({
   selector: 'app-explore-page',
   standalone: true,
-  imports: [LineBreakPipe, JsonPipe, CommonModule, MarkdownModule, FormsModule],
+  imports: [LineBreakPipe, JsonPipe, CommonModule, MarkdownModule, CommentComponent, FormsModule],
   templateUrl: './explore-page.component.html',
   styleUrl: './explore-page.component.css'
 })
@@ -19,13 +21,14 @@ import { FormsModule } from '@angular/forms';
 export class ExplorePageComponent {
   selectedBlog: any = null;
   blogList: BlogData[] = [];
+
   query: string = '';
   sortBy: string = 'CreatedDate';
   sortDirection: string = 'Asc';
   pageNumber: number = 1;
   pageSize: number = 10;
 
-  constructor(private blogService: BlogService, private authorService: AuthorService, private http: HttpClient){}
+  constructor(private blogService: BlogService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){}
 
   ngOnInit(): void {
     this.searchBlogs();

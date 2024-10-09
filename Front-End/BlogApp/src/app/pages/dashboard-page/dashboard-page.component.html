@@ -7,3 +7,26 @@
         <app-blog-create *ngIf="showBlogForm" (close)="closeBlogForm()"></app-blog-create>
 	</div>
 </div>
+<div class="dashboard-container">
+  <h2>Your Blogs</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let blog of userBlogs; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ blog.Title }}</td>
+        <td>
+          <button (click)="editBlog(blog)">Edit</button>
+          <button (click)="deleteBlog(blog.Id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-blog-create *ngIf="blogToEdit" [blogToEdit]="blogToEdit" (close)="blogToEdit = null"></app-blog-create>
+</div>

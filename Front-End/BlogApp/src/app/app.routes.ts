@@ -24,7 +24,7 @@ export const routes: Routes = [
             },
             {
                 path:'dashboard',
-                component:DashboardPageComponent
+                component:DashboardPageComponent,
             }
         ]
     }

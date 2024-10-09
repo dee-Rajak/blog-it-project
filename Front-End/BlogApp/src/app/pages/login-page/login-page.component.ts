@@ -25,7 +25,8 @@ export class LoginPageComponent {
     this.authorForm = new FormGroup(
       {
         Name: new FormControl(''),
-        Email: new FormControl('')
+        Email: new FormControl(''),
+        Password: new FormControl('')
       }
     );
     this.loginForm = new FormGroup({
@@ -40,6 +41,7 @@ export class LoginPageComponent {
       const author: Author = this.authorForm.value;
       this.authorService.registerAuthor(author).subscribe((res: Author) => {
         console.log('Author registered successfully', res);
+        alert("Registered Succesfully, Now Login");
       });
     }
   }

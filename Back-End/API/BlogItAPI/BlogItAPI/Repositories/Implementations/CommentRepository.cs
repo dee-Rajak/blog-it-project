@@ -40,6 +40,12 @@ namespace BlogItAPI.Repositories.Implementations
             return await _context.Comments.Include(c => c.BlogPost).FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<IEnumerable<Comment>> GetCommentsByBlogPostId(int? blogPlostId)
+        {
+            
+            return await _context.Comments.Where(c=>c.BlogPostId == blogPlostId).ToListAsync();
+        }
+
         public async Task UpdateCommentAsync(Comment comment)
         {
             _context.Comments.Update(comment);

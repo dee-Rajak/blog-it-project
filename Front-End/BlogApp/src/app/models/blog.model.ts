@@ -1,31 +1,31 @@
 export class Blog {
-  id: number = 0;
-  title: string;
-  description: string;
-  content: string;
-  createdDate: string;
-  updatedDate: string;
-  featuredImageUrl: string;
-  likes: number = 0;
-  authorId: number;
-  categoryId: number;
+  Id?: number = 0;
+  Title: string;
+  Description: string;
+  Content: string;
+  CreatedDate: string;
+  UpdatedDate: string;
+  FeaturedImageUrl: string;
+  Likes: number = 0;
+  AuthorId: number;
+  CategoryId: number;
 
   constructor(
-    title: string,
-    description: string,
-    content: string,
-    featuredImageUrl: string,
-    authorId: number,
-    categoryId: number
+    Title: string,
+    Description: string,
+    Content: string,
+    FeaturedImageUrl: string,
+    AuthorId: number,
+    CategoryId: number
   ) {
-    this.title = title;
-    this.description = description;
-    this.content = content;
-    this.createdDate = new Date().toISOString();
-    this.updatedDate = new Date().toISOString();
-    this.featuredImageUrl = featuredImageUrl;
-    this.authorId = authorId;
-    this.categoryId = categoryId;
+    this.Title = Title;
+    this.Description = Description;
+    this.Content = Content;
+    this.CreatedDate = new Date().toISOString();
+    this.UpdatedDate = new Date().toISOString();
+    this.FeaturedImageUrl = FeaturedImageUrl;
+    this.AuthorId = AuthorId;
+    this.CategoryId = CategoryId;
   }
 }
 

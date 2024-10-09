@@ -1,5 +1,6 @@
 ﻿using BlogItAPI.Data;
 using BlogItAPI.Models;
+using BlogItAPI.Repositories.Implementations;
 using BlogItAPI.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -34,8 +35,18 @@ namespace BlogItAPI.Controllers
             return Ok(blogPosts);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetBlogPostByAuthorId/{id}")]
+        public async Task<IActionResult> GetBlogPostByAuthorId(int? id)
+        {
+            var blogs = await _blogPostRepository.GetBlogPostByAuthorId(id);
+            if (blogs == null)
+            {
+                return NotFound();
+            }
+            return Ok(blogs);
+        }
 
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetBlogPostById(int id)
         {
             var blogPosts = await _blogPostRepository.GetBlogPostByIdAsync(id);
