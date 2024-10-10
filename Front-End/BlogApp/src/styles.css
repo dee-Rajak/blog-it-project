@@ -3,13 +3,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 
+/* Color Scheme */
 :root {
-  /* Emerald Green Shades */
-  --emerald-green: #50C878;
-  --emerald-dark: #3AA16A;
-  --emerald-light: #A8E6CF;
-  --emerald-muted: #70B48C;
-
   /* OffWhite Shades */
   --off-white: #FAF9F6;
   --off-white-light: #FFFFFF;
@@ -20,6 +15,12 @@
   --pink-dark: #FF8DAA;
   --pink-light: #FFDDE1;
   --pink-muted: #FFB6C1;
+
+    /* Emerald Green Shades */
+  --emerald-green: #50C878;
+  --emerald-dark: #3AA16A;
+  --emerald-light: #A8E6CF;
+  --emerald-muted: #70B48C;
 }
 
 /* Example usage for body background */
