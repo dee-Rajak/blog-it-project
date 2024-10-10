@@ -51,7 +51,6 @@ export class LoginPageComponent {
       this.authService.login(this.loginForm.value).subscribe(
         () => {
           debugger;
-          // localStorage.setItem('token', res.token);
           console.log('Login Successful');
           debugger;
           this.navigateToDashboard();
@@ -90,39 +89,6 @@ export interface AuthCredentials {
 /*
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-@Component({
-  selector: 'app-example',
-  templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
-})
-export class ExampleComponent implements OnInit {
-
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.fetchSecureData();
-  }
-
-  fetchSecureData() {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    this.http.get('https://yourapi.com/secure-data', { headers }).subscribe(
-      (response: any) => {
-        console.log('Secure data fetched', response);
-      },
-      (error: any) => {
-        console.error('Error fetching secure data', error);
-      }
-    );
-  }
-}
-*/
-
-/*
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service'; // Import AuthService
 
 @Component({
@@ -142,7 +108,7 @@ export class ExampleComponent implements OnInit {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    this.http.get('https://yourapi.com/secure-data', { headers }).subscribe(
+    this.http.get('https:', { headers }).subscribe(
       (response: any) => {
         console.log('Secure data fetched', response);
       },

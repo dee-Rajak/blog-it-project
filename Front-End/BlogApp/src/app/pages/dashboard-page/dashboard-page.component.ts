@@ -25,17 +25,15 @@ export class DashboardPageComponent implements OnInit{
 
   fetchUserBlogs() {
     const userId = this.authService.getUserId();
-    this.http.get<any[]>(`https://localhost:7189/api/BlogPosts/GetBlogPostByAuthorId/${userId}`).subscribe(
+    this.blogService.fetchUserBlogs(userId!).subscribe(
       (blogs: any[]) => {
         this.userBlogs = blogs;
       });
   }
 
-  showBlogForm = false;
 
   editBlog(blog: any) {
     this.blogToEdit = blog;
-    // Implement edit functionality
   }
 
   deleteBlog(blogId: number) {
@@ -46,6 +44,8 @@ export class DashboardPageComponent implements OnInit{
       }
     );
   }
+
+  showBlogForm = false;
 
   openBlogForm() {
     this.showBlogForm = true;

@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-comment',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, DatePipe],
+  imports: [ReactiveFormsModule, CommonModule, DatePipe, JsonPipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
@@ -51,7 +51,7 @@ export class CommentComponent implements OnInit {
     if (this.commentForm.valid) {
       const newComment: Comment = {
         Content: this.commentForm.value.content,
-        CreatedDate: new Date(),
+        CreadtedDate: new Date(),
         BlogPostId: this.blogPostId,
         CommentAuthorId: parseInt(this.authService.getUserId() || '0', 10)
       };
@@ -68,7 +68,7 @@ export class CommentComponent implements OnInit {
 
 export interface Comment {
   Content: string;
-  CreatedDate: Date;
+  CreadtedDate: Date;
   BlogPostId: number;
   CommentAuthorId: number;
   CommentAuthorName?: string;
