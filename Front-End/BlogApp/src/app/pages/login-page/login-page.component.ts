@@ -36,6 +36,10 @@ export class LoginPageComponent {
       });
   }
 
+  navigateToDashboard(){
+    this.router.navigateByUrl('/home/dashboard');
+  }
+
   onRegister() {
     if (this.authorForm.valid) {
       const author: Author = this.authorForm.value;
@@ -59,11 +63,6 @@ export class LoginPageComponent {
     }
   }
 
-  navigateToDashboard(){
-    this.router.navigateByUrl('/home/dashboard');
-  }
-
-
   // onLogin(){
   //   // debugger;
   //   this.http.post("https://freeapi.miniprojectideas.com/api/User/Login", this.loginObj).subscribe(
@@ -85,37 +84,3 @@ export interface AuthCredentials {
   Email: string;
   Password: string;
 }
-
-/*
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './auth.service'; // Import AuthService
-
-@Component({
-  selector: 'app-example',
-  templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
-})
-export class ExampleComponent implements OnInit {
-
-  constructor(private http: HttpClient, private authService: AuthService) {}
-
-  ngOnInit() {
-    this.fetchSecureData();
-  }
-
-  fetchSecureData() {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    this.http.get('https:', { headers }).subscribe(
-      (response: any) => {
-        console.log('Secure data fetched', response);
-      },
-      (error: any) => {
-        console.error('Error fetching secure data', error);
-      }
-    );
-  }
-}
- */
