@@ -1,0 +1,34 @@
+.new-nav {
+    background-color: #fff;
+    height: 150px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.footer-text {
+    font-weight: 500;
+    color: #009970;
+    font-size: 20px;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-list li {
+    margin: 5px 0;
+    color: #666777;
+    font-weight: 500;
+}
+
+.footer-list a {
+    color: #009970;
+    text-decoration: none;
+}
+
+.footer-list a:hover {
+    color: #000;
+}
