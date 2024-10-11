@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dhireen Kumar Rajak\\Desktop\\Project\\Blog-It-Project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj": {}
+    "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dhireen Kumar Rajak\\Desktop\\Project\\Blog-It-Project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj": {
+    "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dhireen Kumar Rajak\\Desktop\\Project\\Blog-It-Project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
+        "projectUniqueName": "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
         "projectName": "BlogItAPI",
-        "projectPath": "C:\\Users\\Dhireen Kumar Rajak\\Desktop\\Project\\Blog-It-Project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
-        "packagesPath": "C:\\Users\\Dhireen Kumar Rajak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dhireen Kumar Rajak\\Desktop\\Project\\Blog-It-Project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\obj\\",
+        "projectPath": "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\BlogItAPI.csproj",
+        "packagesPath": "C:\\Users\\b2001\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\b2001\\OneDrive\\Desktop\\Project\\blog-it-project\\Back-End\\API\\BlogItAPI\\BlogItAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dhireen Kumar Rajak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\b2001\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -48,17 +52,17 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[8.0.10, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[8.0.10, )"
             },
             "Portable.BouncyCastle": {
               "target": "Package",
@@ -88,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

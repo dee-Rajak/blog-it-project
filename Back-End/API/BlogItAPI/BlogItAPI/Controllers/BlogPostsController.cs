@@ -73,9 +73,10 @@ namespace BlogItAPI.Controllers
         }
         [Authorize]
         [HttpPut("{id}")]
-
         public async Task<IActionResult> UpdateBlogPost(int id, BlogPost blogPost)
         {
+            Console.WriteLine($"URL id: {id}, BlogPost id: {blogPost.Id}");
+
             if (id != blogPost.Id)
             {
                 return BadRequest();
@@ -83,6 +84,7 @@ namespace BlogItAPI.Controllers
             await _blogPostRepository.UpdateBlogPostAsync(blogPost);
             return NoContent();
         }
+
         [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost(int id)
