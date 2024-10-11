@@ -6,8 +6,9 @@
       <button type="submit">Submit</button>
     </form>
   </div>
+  <!-- <p>{{comments | json}}</p> -->
   <div *ngFor="let comment of comments">
     <p>{{ comment.Content }}</p>
-    <small>By {{ comment.CommentAuthorName }} on {{ comment.CreatedDate | date:'medium'}}</small>
+    <small>By {{ comment.CommentAuthorName }} on {{ comment.CreadtedDate | date }}</small>
   </div>
 </div>

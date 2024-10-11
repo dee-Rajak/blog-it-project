@@ -59,7 +59,7 @@ export class ExplorePageComponent {
         this.blogList = res;
         this.blogList.forEach(blog => {
           this.authorService.getAuthorName(blog.AuthorId).subscribe(author => {
-            blog.AuthorName = author.Name; // Assuming the author object has a 'name' property
+            blog.AuthorName = author.Name;
           });
         });
       }

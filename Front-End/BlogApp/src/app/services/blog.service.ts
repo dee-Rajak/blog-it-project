@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Blog, BlogData } from '../models/blog.model';
 
@@ -14,6 +14,14 @@ export class BlogService {
   addBlog(blog: Blog){
     return this.http.post<Blog>(this.apiUrl, blog);
   }
+
+  fetchUserBlogs(userId: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/GetBlogPostByAuthorId/${userId}`);
+  }
+
+  // getExploreBlogs(params: HttpParams) {
+  //   return this.http.get<BlogData[]>(`${this.apiUrl}`, { params });
+  // }
 
   updateBlog(id: number, blog: Blog){
     debugger;

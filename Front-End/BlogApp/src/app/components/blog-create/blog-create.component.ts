@@ -35,6 +35,7 @@ export class BlogCreateComponent implements OnInit{
   onSubmit() {
     if (this.blogForm.valid) {
       const blog = {
+        Id: this.blogToEdit?.Id,
         Title: this.blogForm.value.title,
         Description: this.blogForm.value.description,
         Content: this.blogForm.value.content,
