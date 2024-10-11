@@ -33,10 +33,12 @@ namespace BlogItAPI.Controllers
             {
                 return BadRequest("Email already exists");
             }
-
-            _context.Authors.Add(author);
-            _context.SaveChanges();
-            return Ok("Registration successful.");
+            else
+            {
+                _context.Authors.Add(author);
+                _context.SaveChanges();
+                return Ok("Registration successful.");
+            }
         }
 
         [HttpPost("login")]
