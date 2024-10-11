@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241011075321_Added Like Funciton")]
-    partial class AddedLikeFunciton
+    [Migration("20241011151046_First Mig with all functions")]
+    partial class FirstMigwithallfunctions
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
