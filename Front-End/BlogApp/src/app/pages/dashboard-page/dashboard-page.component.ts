@@ -44,6 +44,9 @@ export class DashboardPageComponent implements OnInit{
       }
     );
   }
+  getCategories(){
+    this.http.get()
+  }
 
   showBlogForm = false;
 

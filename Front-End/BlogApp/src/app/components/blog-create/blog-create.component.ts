@@ -6,6 +6,7 @@ import { Blog } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-blog-create',
@@ -17,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
 export class BlogCreateComponent implements OnInit{
   @Output() close = new EventEmitter<void>();
   @Input() blogToEdit: Blog | null = null;
+  @Input() categories: Category[] | null = null;
 
   blogForm!: FormGroup;
 

@@ -419,3 +419,9 @@ C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\B
 C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\b2001\OneDrive\Desktop\Project\blog-it-project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Dhireen Kumar Rajak\Desktop\Project\Blog-It-Project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Dhireen Kumar Rajak\Desktop\Project\Blog-It-Project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Dhireen Kumar Rajak\Desktop\Project\Blog-It-Project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Dhireen Kumar Rajak\Desktop\Project\Blog-It-Project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\Dhireen Kumar Rajak\Desktop\Project\Blog-It-Project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Dhireen Kumar Rajak\Desktop\Project\Blog-It-Project\Back-End\API\BlogItAPI\BlogItAPI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

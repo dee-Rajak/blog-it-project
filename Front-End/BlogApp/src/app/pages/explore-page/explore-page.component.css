@@ -1,3 +1,75 @@
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 80%;
+}
+
+.search-bar {
+    width: 50rem;
+    height: 2rem;
+    /* margin-bottom: 20px; */
+}
+
+.search-bar input {
+    width: 100%;
+    /* padding: 10px; */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.filter-controls button, .filter-controls select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.filter-controls button:hover, .filter-controls select:hover {
+    border-color: #009970;
+}
+
+
+.pagination-button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.pagination-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-button:hover:not(:disabled) {
+    border-color: #009970;
+}
+
+.pagination-info {
+    font-size: 16px;
+    color: #666;
+}
+
+
+
 .fixed-image-container {
   height: 200px;  /* Fixed height for the container */
   width: 100%;    /* Ensure the container takes full width of the column */

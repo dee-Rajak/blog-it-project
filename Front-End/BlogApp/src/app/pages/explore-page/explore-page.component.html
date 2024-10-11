@@ -1,11 +1,12 @@
 <!-- blog-card.component.html -->
 <div class="search-section">
-    <input type="text" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
-
+    
     <div class="filter-controls">
         <button (click)="toggleSortDirection()">
             Sort: {{ sortDirection === 'Asc' ? 'Ascending' : 'Descending' }}
         </button>
+
+        <input type="text" class="search-bar" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
 
         <select [(ngModel)]="sortBy" (change)="searchBlogs()">
             <option value="CreatedDate">Created Date</option>
@@ -34,10 +35,10 @@
 </div>
 
 
-<div class="pagination-controls">
-    <button (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
-    <span>Page {{ pageNumber }}</span>
-    <button (click)="nextPage()" [disabled]="!hasMoreBlogs()">Next</button>
+<div class="d-flex justify-content-center">
+    <button class="pagination-button" (click)="previousPage()" [disabled]="pageNumber <= 1">Previous</button>
+    <span class="pagination-info">Page {{ pageNumber }}</span>
+    <button class="pagination-button" (click)="nextPage()" [disabled]="!hasMoreBlogs()">Next</button>
 </div>
 
 <div class="floating-card" *ngIf="selectedBlog">
