@@ -88,13 +88,26 @@ namespace BlogItAPI.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task LikePostAsync(int id)
+        public async Task LikePostAsync(int authorId, int blogPostId)
         {
-            var blogPost = await _context.BlogPosts.FindAsync(id);
-            if(blogPost!=null)
+            var existingLike = await _context.Likes.FirstOrDefaultAsync(l => l.AuthorId == authorId && l.BlogPostId == blogPostId);
+            var blogPost = await _context.BlogPosts.FindAsync(blogPostId);
+
+           
+            if (existingLike != null)
             {
-                blogPost.Likes++;
-               await  _context.SaveChangesAsync();
+                _context.Likes.Remove(existingLike);
+                blogPost.LikeCount--;
+                await _context.SaveChangesAsync();
+                
+            }
+            else
+            {
+                var like = new Like { AuthorId = authorId, BlogPostId = blogPostId };
+                await _context.Likes.AddAsync(like);
+                blogPost.LikeCount++;
+                await _context.SaveChangesAsync();
+              
             }
         }
     }

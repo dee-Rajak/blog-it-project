@@ -26,9 +26,9 @@ namespace BlogItAPI.Models
 
         public string? FeaturedImageUrl { get; set; }
 
-        public int Likes { get; set; }
+        public int LikeCount { get; set; }
 
-        [ForeignKey("Authors")]
+        [ForeignKey("Author")]
         public int AuthorId { get; set; }
 
         [JsonIgnore]
@@ -37,7 +37,9 @@ namespace BlogItAPI.Models
         
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-        [ForeignKey("Cateogry")]
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
+
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
         [JsonIgnore]
         public Category? Category { get; set; }

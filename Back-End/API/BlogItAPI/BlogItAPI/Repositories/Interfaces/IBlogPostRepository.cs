@@ -17,7 +17,7 @@ namespace BlogItAPI.Repositories.Interfaces
 
         Task DeleteBlogPostAsync(int id);
 
-        Task LikePostAsync(int id);
+        Task LikePostAsync(int authorId, int blogPostId);
 
     }
 }

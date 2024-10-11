@@ -95,9 +95,9 @@ namespace BlogItAPI.Controllers
         [Authorize]
         [HttpPost("{id}/like")]
 
-        public async Task<IActionResult> LikePost(int id)
+        public async Task<IActionResult> LikePost(int authorId,int blogPostId)
         {
-            await _blogPostRepository.LikePostAsync(id);
+            await _blogPostRepository.LikePostAsync(authorId,blogPostId);
             return NoContent();
         }
 

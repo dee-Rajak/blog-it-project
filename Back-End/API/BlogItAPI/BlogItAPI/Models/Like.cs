@@ -4,31 +4,24 @@ using System.Text.Json.Serialization;
 
 namespace BlogItAPI.Models
 {
-    [Table("Comments")]
-    public class Comment
+    [Table("Likes")]
+    public class Like
     {
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public string Content { get; set; }
-
-        [Required]
-        public DateTime CreadtedDate { get; set; }
-
         [ForeignKey("BlogPost")]
         public int BlogPostId { get; set; }
-
-        [ForeignKey("Author")]
-        public int CommentAuthorId { get; set; }
-
-        [JsonIgnore]
-        public Author? Author { get; set; }
 
         [JsonIgnore]
         public BlogPost? BlogPost { get; set; }
 
-        
+        [ForeignKey("Author")]
 
+        
+        public int AuthorId { get; set; }
+
+        [JsonIgnore]
+        public Author? Author {  get; set; }     
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241009140619_Migration after frontend pull")]
-    partial class Migrationafterfrontendpull
+    [Migration("20241011075321_Added Like Funciton")]
+    partial class AddedLikeFunciton
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,7 +80,7 @@ namespace BlogItAPI.Migrations
                     b.Property<string>("FeaturedImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Likes")
+                    b.Property<int>("LikeCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -148,7 +148,32 @@ namespace BlogItAPI.Migrations
 
                     b.HasIndex("BlogPostId");
 
+                    b.HasIndex("CommentAuthorId");
+
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("BlogItAPI.Models.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogPostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>
@@ -179,8 +204,35 @@ namespace BlogItAPI.Migrations
                     b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")
                         .WithMany("Comments")
                         .HasForeignKey("BlogPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("BlogItAPI.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("CommentAuthorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("BlogPost");
+                });
+
+            modelBuilder.Entity("BlogItAPI.Models.Like", b =>
+                {
+                    b.HasOne("BlogItAPI.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")
+                        .WithMany("Likes")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("BlogPost");
                 });
@@ -195,6 +247,8 @@ namespace BlogItAPI.Migrations
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.Category", b =>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogItAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Migrationafterfrontendpull : Migration
+    public partial class AddedLikeFunciton : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -52,7 +52,7 @@ namespace BlogItAPI.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FeaturedImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Likes = table.Column<int>(type: "int", nullable: false),
+                    LikeCount = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -94,11 +94,39 @@ namespace BlogItAPI.Migrations
                         principalTable: "Authors",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_Comments_Authors_CommentAuthorId",
+                        column: x => x.CommentAuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Comments_BlogPosts_BlogPostId",
                         column: x => x.BlogPostId,
                         principalTable: "BlogPosts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlogPostId = table.Column<int>(type: "int", nullable: false),
+                    AuthorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Likes_Authors_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "Authors",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Likes_BlogPosts_BlogPostId",
+                        column: x => x.BlogPostId,
+                        principalTable: "BlogPosts",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -120,6 +148,21 @@ namespace BlogItAPI.Migrations
                 name: "IX_Comments_BlogPostId",
                 table: "Comments",
                 column: "BlogPostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CommentAuthorId",
+                table: "Comments",
+                column: "CommentAuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_AuthorId",
+                table: "Likes",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_BlogPostId",
+                table: "Likes",
+                column: "BlogPostId");
         }
 
         /// <inheritdoc />
@@ -127,6 +170,9 @@ namespace BlogItAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Likes");
 
             migrationBuilder.DropTable(
                 name: "BlogPosts");
