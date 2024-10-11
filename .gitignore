@@ -1,1 +1,4 @@
 .vs/
+# Ignore build artifacts
+Back-End/API/BlogItAPI/BlogItAPI/bin/
+Back-End/API/BlogItAPI/BlogItAPI/obj/
