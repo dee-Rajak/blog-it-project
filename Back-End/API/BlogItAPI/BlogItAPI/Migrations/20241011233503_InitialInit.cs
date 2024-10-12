@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogItAPI.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Back-End/API/BlogItAPI/BlogItAPI/Migrations/20241011112630_InitialInit.cs
     public partial class InitialInit : Migration
-========
-    public partial class FirstMigwithallfunctions : Migration
->>>>>>>> a902a344c19c3e0951c2460b7562b98f2d2ef2a1:Back-End/API/BlogItAPI/BlogItAPI/Migrations/20241011151046_First Mig with all functions.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

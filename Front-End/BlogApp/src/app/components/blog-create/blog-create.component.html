@@ -1,11 +1,11 @@
 <!-- blog-create.component.html -->
 <div class="floating-card">
-    <div class="d-flex justify-content-between">
-        <h2>Create Blog</h2>
-        <button class="btn btn-dark" (click)="closeForm()">
-            <i class="bi bi-x"></i>
-        </button>
-    </div>
+  <div class="d-flex justify-content-between">
+    <h2>Create Blog</h2>
+    <button class="btn btn-dark" (click)="closeForm()">
+      <i class="bi bi-x"></i>
+    </button>
+  </div>
   <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
     <div class="form-section">
       <label for="title">Title</label>
@@ -21,7 +21,12 @@
       <input type="number" formControlName="authorId" placeholder="Author ID"> -->
 
       <label for="categoryId">Category ID</label>
-      <input type="number" formControlName="categoryId" placeholder="Category ID">
+      <select formControlName="categoryId">
+        <!-- Populate this list with options from API call -->
+        <option *ngFor="let category of categoryList" [value]="category.Id">{{ category.Name }}</option>
+      </select>
+
+      <!-- <input type="number" formControlName="categoryId" placeholder="Category ID"> -->
 
       <label for="content">Content (Markdown)</label>
       <div class="content-section">

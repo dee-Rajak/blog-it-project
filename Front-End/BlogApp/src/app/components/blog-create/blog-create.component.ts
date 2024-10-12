@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { Blog } from '../../models/blog.model';
@@ -7,22 +7,27 @@ import { BlogService } from '../../services/blog.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Category } from '../../models/category.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-blog-create',
   standalone: true,
-  imports: [MarkdownModule, ReactiveFormsModule],
+  imports: [MarkdownModule, ReactiveFormsModule, CommonModule],
   templateUrl: './blog-create.component.html',
   styleUrl: './blog-create.component.css'
 })
 export class BlogCreateComponent implements OnInit{
   @Output() close = new EventEmitter<void>();
   @Input() blogToEdit: Blog | null = null;
-  @Input() categories: Category[] | null = null;
+  // @Input() categories!: Category[];
 
   blogForm!: FormGroup;
+  categoryList!: Category[];
 
-  constructor(private blogService: BlogService, private authService: AuthService, private router: Router){}
+
+  constructor(private blogService: BlogService, private authService: AuthService, private router: Router, private http: HttpClient){
+    this.getCategories();
+  }
 
   ngOnInit() {
     this.blogForm = new FormGroup({
@@ -32,6 +37,17 @@ export class BlogCreateComponent implements OnInit{
       featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : ''),
       categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '')
     });
+    
+  }
+
+  getCategories(){
+    this.http.get('https://localhost:7189/api/Categories/getCategories').subscribe(
+      (res: any) => {
+        debugger;
+        this.categoryList = res;
+        debugger;
+      }
+    )
   }
 
   onSubmit() {
@@ -46,7 +62,7 @@ export class BlogCreateComponent implements OnInit{
         CategoryId: this.blogForm.value.categoryId,
         CreatedDate: new Date().toISOString(),
         UpdatedDate: new Date().toISOString(),
-        Likes: this.blogToEdit ? this.blogToEdit.Likes : 0
+        LikeCount: this.blogToEdit ? this.blogToEdit.LikeCount : 0
       };
       if (this.blogToEdit) {
         // Editing existing blog

@@ -379,6 +379,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BlogItAPI.Controllers.CategoriesController",
+    "Method": "GetCategories",
+    "RelativePath": "api/Categories/getCategories",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BlogItAPI.Controllers.CommentsController",
     "Method": "GetComments",
     "RelativePath": "api/Comments",

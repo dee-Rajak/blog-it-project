@@ -5,6 +5,7 @@ namespace BlogItAPI.Repositories.Interfaces
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> GetCategoriesAsync(string? query = null,string? sortBy = null, string? sortDirection =null, int? pageNumber = 1, int? pageSize = 5);
+        Task<IEnumerable<Category>> GetCategoryAsync();
 
         Task<Category> GetCategoryByIdAsync(int id);
 
