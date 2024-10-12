@@ -5,6 +5,7 @@ import { BlogCreateComponent } from '../../components/blog-create/blog-create.co
 import { AuthService } from '../../services/auth.service';
 import { Blog } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -16,6 +17,7 @@ import { BlogService } from '../../services/blog.service';
 export class DashboardPageComponent implements OnInit{
   userBlogs: any[] = [];
   blogToEdit: Blog | null = null;
+  categoryList!: Category[];
 
   constructor(private http: HttpClient, private authService: AuthService, private blogService: BlogService) {}
   
@@ -43,6 +45,14 @@ export class DashboardPageComponent implements OnInit{
         this.userBlogs = this.userBlogs.filter(blog => blog.Id !== blogId);
       }
     );
+  }
+  getCategories(){
+    this.http.get('https://localhost:7189/api/Categories/getCategories').subscribe(
+      (res: any) => {
+        debugger;
+        this.categoryList = res;
+      }
+    )
   }
 
   showBlogForm = false;

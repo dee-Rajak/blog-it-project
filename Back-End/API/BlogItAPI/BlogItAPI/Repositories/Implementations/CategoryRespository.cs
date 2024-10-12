@@ -69,7 +69,12 @@ namespace BlogItAPI.Repositories.Implementations
             //return await _context.Categories.ToListAsync();
         }
 
-        public async Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<IEnumerable<Category>> GetCategoryAsync()
+        {
+            return await _context.Categories.ToListAsync();
+        }
+
+            public async Task<Category> GetCategoryByIdAsync(int id)
         {
             return await _context.Categories.FindAsync(id);
         }

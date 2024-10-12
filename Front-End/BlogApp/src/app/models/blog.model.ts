@@ -6,7 +6,7 @@ export class Blog {
   CreatedDate: string;
   UpdatedDate: string;
   FeaturedImageUrl: string;
-  Likes: number = 0;
+  LikeCount: number = 0;
   AuthorId: number;
   CategoryId: number;
 
@@ -36,7 +36,7 @@ export interface BlogData {
   Content: string;
   CreatedDate: string;
   UpdatedDate: string;
-  Likes: number;
+  LikeCount: number;
   FeaturedImageUrl: string;
   AuthorId: number;
   AuthorName?: string;

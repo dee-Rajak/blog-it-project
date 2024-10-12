@@ -1,0 +1,27 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #1e3d34;  /* Emerald Green */
+}
+
+.lead {
+    color: #233d4d;  /* Slightly darker text color */
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul li::before {
+    content: "✔️";
+    margin-right: 10px;
+    color: #ff5c8a;  /* Pink Accent */
+}
