@@ -83,13 +83,14 @@
 }
 
 .card {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin: 0 auto 20px auto;
   cursor: pointer;
   background: #ffffff;
   border: 1px solid #233d4d;
   width: 60%;
   
-  /* border-radius: 20px; */
+  border-radius: 20px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
