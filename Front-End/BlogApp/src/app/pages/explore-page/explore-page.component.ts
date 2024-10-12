@@ -9,11 +9,12 @@ import { BlogService } from '../../services/blog.service';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CommentComponent } from '../../components/comment/comment.component';
+import { LikeComponent } from '../../components/like/like.component';
 
 @Component({
   selector: 'app-explore-page',
   standalone: true,
-  imports: [LineBreakPipe, JsonPipe, CommonModule, MarkdownModule, CommentComponent, FormsModule],
+  imports: [LikeComponent, LineBreakPipe, JsonPipe, CommonModule, MarkdownModule, CommentComponent, FormsModule],
   templateUrl: './explore-page.component.html',
   styleUrl: './explore-page.component.css'
 })
@@ -21,6 +22,7 @@ import { CommentComponent } from '../../components/comment/comment.component';
 export class ExplorePageComponent {
   selectedBlog: any = null;
   blogList: BlogData[] = [];
+  userId: any;
 
   query: string = '';
   sortBy: string = 'CreatedDate';
@@ -38,10 +40,12 @@ export class ExplorePageComponent {
 
   showContent(blog: BlogData) {
     this.selectedBlog = blog;
+    this.userId = this.authService.getUserId();
   }
 
   closeContent() {
     this.selectedBlog = null;
+    this.searchBlogs();
   }
 
   searchBlogs() {

@@ -30,6 +30,7 @@ export class Blog {
 }
 
 export interface BlogData {
+  Comments: any[];
   Id: number;
   Title: string;
   Description: string;

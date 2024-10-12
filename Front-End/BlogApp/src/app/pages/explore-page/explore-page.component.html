@@ -1,12 +1,13 @@
 <!-- blog-card.component.html -->
 <div class="search-section">
-    
+
     <div class="filter-controls">
         <button (click)="toggleSortDirection()">
             Sort: {{ sortDirection === 'Asc' ? 'Ascending' : 'Descending' }}
         </button>
 
-        <input type="text" class="search-bar" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
+        <input type="text" class="search-bar" placeholder="Search blogs..." [(ngModel)]="query"
+            (input)="searchBlogs()" />
 
         <select [(ngModel)]="sortBy" (change)="searchBlogs()">
             <option value="CreatedDate">Created Date</option>
@@ -16,7 +17,7 @@
     </div>
 </div>
 
-<div class="card justify"*ngFor="let blog of blogList" (click)="showContent(blog)">
+<div class="card justify" *ngFor="let blog of blogList" (click)="showContent(blog)">
     <div class="card-body">
         <div class="row">
             <div class="col-4 fized-image-container">
@@ -28,7 +29,10 @@
                 <h5 class="card-title display-5">{{ blog.Title }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ blog.AuthorName }}</h6>
                 <p class="card-text">{{ blog.Description }}</p>
-                <p class="card-text">Likes: {{ blog.LikeCount }}</p>
+                <div>
+                    <span class="card-text">Likes: {{ blog.LikeCount }}</span>
+                    <span class="card-text">Comments: {{blog.Comments.length}}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -42,23 +46,36 @@
 </div>
 
 <div class="floating-card" *ngIf="selectedBlog">
-    <div class="card-body">
+    <div class="mx-4">
+        <div class="card-body row justify-content-between">
 
-        <div class="d-flex justify-content-end">
-            <button class="btn btn-dark" (click)="closeContent()"><i class="bi bi-x"></i></button>
+            <div class="col-10">
+                <h5 class=" mb-2 card-title display-5">{{ selectedBlog.Title }}</h5>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <button class="btn btn-dark" (click)="closeContent()"><i class="bi bi-x"></i></button>
+            </div>
         </div>
         <div>
-            <h5 class=" mb-2 card-title display-5">{{ selectedBlog.Title }}</h5>
+            <p>Published On: {{selectedBlog.UpdatedDate | date}}</p>
         </div>
         <div>
-            <h6 class="card-subtitle mb-2 text-muted">{{ selectedBlog.AuthorName }}</h6>
+            <!-- <app-like-button [authorId]="selectedBlog.authorId" [blogPostId]="selectedBlog.Id" [likes]="selectedBlog.LikeCount"> </app-like-button> --->
+            <app-like [authorId]="userId" [blogPostId]="selectedBlog.Id" [likes]="selectedBlog.LikeCount"></app-like>
         </div>
-    </div>
-    <div>
-        <!-- <p class="card-text" [innerHTML]="selectedBlog.Content | lineBreak"></p> -->
-        <markdown [data]="selectedBlog.Content"></markdown>
-        <!-- <markdown [data]="blogForm.get('content')?.value"></markdown> -->
+        <br>
+        <div>
+            <h6 class="card-subtitle mb-2 text-muted">~ by {{ selectedBlog.AuthorName }}</h6>
+        </div>
+        <br>
+        <div>
+            <!-- <p class="card-text" [innerHTML]="selectedBlog.Content | lineBreak"></p> -->
+            <markdown [data]="selectedBlog.Content"></markdown>
+            <!-- <markdown [data]="blogForm.get('content')?.value"></markdown> -->
 
+        </div>
+        <hr>
+        <br>
+        <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
     </div>
-    <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
 </div>

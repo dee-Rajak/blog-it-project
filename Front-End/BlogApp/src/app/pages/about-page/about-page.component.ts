@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   selector: 'app-about-page',
   standalone: true,
-  imports: [],
+  imports: [HeaderComponent],
   templateUrl: './about-page.component.html',
   styleUrl: './about-page.component.css'
 })
