@@ -46,6 +46,7 @@ export class LoginPageComponent {
       this.authorService.registerAuthor(author).subscribe((res: Author) => {
         console.log('Author registered successfully', res);
         alert("Registered Succesfully, Now Login");
+        this.authorForm.reset();
       });
     }
   }

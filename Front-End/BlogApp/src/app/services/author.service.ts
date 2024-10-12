@@ -16,4 +16,7 @@ export class AuthorService {
   getAuthorName(authorId: number): Observable<any> {
     return this.http.get<any>(`https://localhost:7189/api/Authors/${authorId}`);
   }
+  delete(authorId: string){
+    return this.http.delete(`https://localhost:7189/api/Authors/${authorId}`);
+  }
 }
