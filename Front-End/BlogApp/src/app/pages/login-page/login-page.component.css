@@ -6,8 +6,6 @@
 	align-items: center;
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
-	/* background: #233d4d; */
-	/* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
 }
 .main{
 	width: 350px;
@@ -26,6 +24,12 @@
 	width:100%;
 	height: 100%;
 }
+.valid {
+	text-align: center;
+	width: 60%;
+	margin: 0 auto;
+}
+
 label{
 	color: #fff;
 	font-size: 2.3em;

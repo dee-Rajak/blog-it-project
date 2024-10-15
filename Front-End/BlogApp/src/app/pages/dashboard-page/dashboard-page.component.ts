@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { Blog } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
 import { Category } from '../../models/category.model';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -19,7 +20,7 @@ export class DashboardPageComponent implements OnInit{
   blogToEdit: Blog | null = null;
   categoryList!: Category[];
 
-  constructor(private http: HttpClient, private authService: AuthService, private blogService: BlogService) {}
+  constructor(private http: HttpClient, private categoryService: CategoryService, private authService: AuthService, private blogService: BlogService) {}
   
   ngOnInit() {
     this.fetchUserBlogs();
@@ -33,21 +34,22 @@ export class DashboardPageComponent implements OnInit{
       });
   }
 
-
   editBlog(blog: any) {
     this.blogToEdit = blog;
   }
 
   deleteBlog(blogId: number) {
+    debugger;
     this.blogService.deleteBlog(blogId).subscribe(
       () => {
+        debugger;
         console.log(`Blog with ID ${blogId} deleted successfully`);
         this.userBlogs = this.userBlogs.filter(blog => blog.Id !== blogId);
       }
     );
   }
   getCategories(){
-    this.http.get('https://localhost:7189/api/Categories/getCategories').subscribe(
+    this.categoryService.getCategories().subscribe(
       (res: any) => {
         debugger;
         this.categoryList = res;

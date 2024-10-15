@@ -1,3 +1,9 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow-y: auto; /* Ensure the body can scroll */
+}
+
 .text-container {
   z-index: 100;
   width: 100vw;
@@ -13,6 +19,11 @@
   opacity: 0.8;
   user-select: none;
   text-shadow: 1px 1px rgba(0,0,0,0.1);
+}
+
+.main-container {
+  overflow: auto; /* Allow scrolling */
+  height: 100vh; /* Ensure full viewport height */
 }
 
 :root {

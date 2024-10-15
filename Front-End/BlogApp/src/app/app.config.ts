@@ -11,7 +11,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([customInterceptor])), provideZoneChangeDetection({ eventCoalescing: true }),
     provideMarkdown(),
-    // {provide: MarkdownModule},
     provideRouter(routes),
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     JwtHelperService

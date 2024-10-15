@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
 export class BlogCreateComponent implements OnInit{
   @Output() close = new EventEmitter<void>();
   @Input() blogToEdit: Blog | null = null;
-  // @Input() categories!: Category[];
 
   blogForm!: FormGroup;
   categoryList!: Category[];
@@ -37,7 +36,6 @@ export class BlogCreateComponent implements OnInit{
       featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : ''),
       categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '')
     });
-    
   }
 
   getCategories(){
@@ -65,7 +63,6 @@ export class BlogCreateComponent implements OnInit{
         LikeCount: this.blogToEdit ? this.blogToEdit.LikeCount : 0
       };
       if (this.blogToEdit) {
-        // Editing existing blog
         this.blogService.updateBlog(this.blogToEdit.Id!, blog).subscribe(
           response => {
             debugger;
@@ -74,7 +71,6 @@ export class BlogCreateComponent implements OnInit{
           }
         );
       } else {
-        // Creating new blog
         this.blogService.addBlog(blog).subscribe(
           response => {
             console.log('Blog created successfully', response);

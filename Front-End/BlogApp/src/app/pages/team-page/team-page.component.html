@@ -1,1 +1,9 @@
-<p>team-page works!</p>
+<app-header></app-header>
+<div class="team-container">
+  <div class="team-grid">
+    <div *ngFor="let member of teamMembers" class="team-card">
+      <img [src]="member.photo" alt="{{member.name}}" class="team-photo">
+      <h3 class="team-name">{{member.name}}</h3>
+    </div>
+  </div>
+</div>
