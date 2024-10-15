@@ -19,9 +19,6 @@ export class BlogService {
     return this.http.get<any[]>(`${this.apiUrl}/GetBlogPostByAuthorId/${userId}`);
   }
 
-  // getExploreBlogs(params: HttpParams) {
-  //   return this.http.get<BlogData[]>(`${this.apiUrl}`, { params });
-  // }
 
   updateBlog(id: number, blog: Blog){
     debugger;
@@ -29,16 +26,9 @@ export class BlogService {
   }
 
   deleteBlog(id: number){
+    debugger;
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
 
-  // createBlog(blog: Blog){
-  //   // const token = localStorage.getItem('token');
-  //   // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  //   return this.http.post<Blog>("https://localhost:7189/api/BlogPosts", blog);
-  // }
-  // getBlogs(){
-  //   return this.http.get<BlogData[]>("https://localhost:7189/api/BlogPosts");
-  // }
 }

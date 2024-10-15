@@ -1,7 +1,3 @@
-<!-- <button class="btn btn-outline-primary" (click)="likeBlog()">
-  <i class="bi bi-hand-thumbs-up"></i> Like {{ likes }}
-</button> -->
-
 <button class="btn btn-outline-primary" (click)="toggleLike()">
   <i class="bi" [ngClass]="{'bi-hand-thumbs-up': !liked, 'bi-hand-thumbs-down': liked}"></i>
   {{ liked ? 'Unlike' : 'Like' }} {{ likes }}

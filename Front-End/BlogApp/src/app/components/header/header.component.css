@@ -6,9 +6,10 @@
     padding: 0.5rem;
 }
 .navbar-brand {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 500;
-    color: #009970;
-    font-size: 24px;
+    color: #66019e;
+    font-size: 34px;
     transition: 0.3s color;
 }
 .navbar .navbar-nav {
@@ -40,7 +41,7 @@
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: #009970;
+    background-color: #66019e;
     visibility: hidden;
     transition: 0.3s ease-in-out;
 }

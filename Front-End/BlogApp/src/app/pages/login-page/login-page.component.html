@@ -2,24 +2,47 @@
 	<div class="main">
 		<input type="checkbox" id="chk" aria-hidden="true">
 
-    <!-- For Register -->
+		<!-- For Register -->
 		<div class="register">
 			<form [formGroup]="authorForm">
 				<label for="chk" aria-hidden="true">Register</label>
-				<input type="text" formControlName="Name" name="txt" placeholder="User name" required="">
-				<input type="email" formControlName="Email" name="email" placeholder="Email" required="">
-				<input type="password" formControlName="Password" name="pswd" placeholder="Password" required>
-				<button (click)="onRegister()">Register</button>
+				<input type="text" formControlName="Name" name="txt" placeholder="User name">
+				<div class="text-danger valid" *ngIf="authorForm.controls['Name'].touched">
+					<span *ngIf="authorForm.controls['Name'].errors?.['required']">Name is Required</span>
+					<span *ngIf="authorForm.controls['Name'].errors?.['minlength']">Min 4 Characters Required</span>
+				</div>
+
+				<input type="email" formControlName="Email" name="email" placeholder="Email">
+				<div class="text-danger valid" *ngIf="authorForm.controls['Email'].touched">
+					<span *ngIf="authorForm.controls['Email'].errors?.['required']">Email is Required</span>
+					<span *ngIf="authorForm.controls['Email'].errors?.['email']">Email Format is Incorrect</span>
+				</div>
+
+				<input type="password" formControlName="Password" name="pswd" placeholder="Password">
+				<div class="text-danger valid" *ngIf="authorForm.controls['Password'].touched">
+					<span *ngIf="authorForm.controls['Password'].errors?.['required']">Password is Required</span>
+				</div>
+
+				<button (click)="onRegister()" [disabled]="authorForm.invalid">Register</button>
 			</form>
 		</div>
-    <!-- For Login -->
+		<!-- For Login -->
 		<div class="login">
 			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 				<label for="chk" aria-hidden="true">Login</label>
-				<input type="text" formControlName="Name" name="txt" placeholder="User name" required>
+				<!-- <input type="text" formControlName="Name" name="txt" placeholder="User name" required> -->
 				<input type="email" formControlName="Email" name="email" placeholder="Email" required>
+				<div class="text-danger valid" *ngIf="loginForm.controls['Email'].touched">
+					<span *ngIf="loginForm.controls['Email'].errors?.['required']">Email is Required</span>
+					<span *ngIf="loginForm.controls['Email'].errors?.['email']">Email Format is Incorrect</span>
+				</div>
+
 				<input type="password" formControlName="Password" name="pswd" placeholder="Password" required>
-				<button type="submit">Login</button>
+				<div class="text-danger valid" *ngIf="loginForm.controls['Password'].touched">
+					<span *ngIf="loginForm.controls['Password'].errors?.['required']">Password is Required</span>
+				</div>
+
+				<button type="submit" [disabled]="loginForm.invalid">Login</button>
 			</form>
 		</div>
 	</div>

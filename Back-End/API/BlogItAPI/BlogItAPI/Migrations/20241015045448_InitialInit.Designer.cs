@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241011233503_InitialInit")]
+    [Migration("20241015045448_InitialInit")]
     partial class InitialInit
     {
         /// <inheritdoc />
@@ -39,7 +39,6 @@ namespace BlogItAPI.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 

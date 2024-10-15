@@ -13,13 +13,13 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  overflow: auto; /* Ensures nothing overflows */
+  overflow: auto;
 }
 
 .form-section {
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Enable scrolling */
+  overflow-y: auto; 
   flex-grow: 1;
   margin-bottom: 20px;
 }
