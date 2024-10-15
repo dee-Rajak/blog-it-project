@@ -15,7 +15,7 @@ namespace BlogItAPI.Controllers
 
         public CommentsController(ICommentRepository commentRepository)
         {
-            _commentRepository = commentRepository;
+            _commentRepository = commentRepository; 
         }
 
         [HttpGet]
