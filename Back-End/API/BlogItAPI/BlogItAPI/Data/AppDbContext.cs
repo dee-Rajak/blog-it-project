@@ -21,11 +21,7 @@ namespace BlogItAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Like>()
-       .HasOne(l => l.BlogPost)
-       .WithMany(b => b.Likes)
-       .HasForeignKey(l => l.BlogPostId)
-       .OnDelete(DeleteBehavior.Cascade); // This line enables cascading delete
+           
 
             modelBuilder.Entity<Like>()
         .HasOne(l => l.BlogPost)
