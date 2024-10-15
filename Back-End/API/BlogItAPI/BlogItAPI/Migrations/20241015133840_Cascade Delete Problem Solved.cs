@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogItAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialInit : Migration
+    public partial class CascadeDeleteProblemSolved : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,22 +82,17 @@ namespace BlogItAPI.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreadtedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BlogPostId = table.Column<int>(type: "int", nullable: false),
-                    CommentAuthorId = table.Column<int>(type: "int", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: true)
+                    CommentAuthorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Authors_AuthorId",
-                        column: x => x.AuthorId,
-                        principalTable: "Authors",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Comments_Authors_CommentAuthorId",
                         column: x => x.CommentAuthorId,
                         principalTable: "Authors",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_BlogPosts_BlogPostId",
                         column: x => x.BlogPostId,
@@ -121,13 +116,20 @@ namespace BlogItAPI.Migrations
                         name: "FK_Likes_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Likes_BlogPosts_BlogPostId",
                         column: x => x.BlogPostId,
                         principalTable: "BlogPosts",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Authors_Email",
+                table: "Authors",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_BlogPosts_AuthorId",
@@ -138,11 +140,6 @@ namespace BlogItAPI.Migrations
                 name: "IX_BlogPosts_CategoryId",
                 table: "BlogPosts",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_AuthorId",
-                table: "Comments",
-                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_BlogPostId",

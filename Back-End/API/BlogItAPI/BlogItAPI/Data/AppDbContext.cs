@@ -21,36 +21,25 @@ namespace BlogItAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Like>()
-       .HasOne(l => l.BlogPost)
-       .WithMany(b => b.Likes)
-       .HasForeignKey(l => l.BlogPostId)
-       .OnDelete(DeleteBehavior.Cascade); // This line enables cascading delete
-
-            modelBuilder.Entity<Like>()
-        .HasOne(l => l.BlogPost)
-        .WithMany(b => b.Likes)
-        .HasForeignKey(l => l.BlogPostId)
-        .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<Like>()
-                .HasOne(l => l.Author)
-                .WithMany()
-                .HasForeignKey(l => l.AuthorId)
-                .OnDelete(DeleteBehavior.NoAction); 
-
             
+
+            // Prevent cascade delete for Likes -> BlogPost
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.BlogPost)
+                .WithMany(b => b.Likes)
+                .HasForeignKey(l => l.BlogPostId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Other relationships remain the same
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.BlogPost)
                 .WithMany(b => b.Comments)
                 .HasForeignKey(c => c.BlogPostId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.Author)
-                .WithMany()
-                .HasForeignKey(c => c.CommentAuthorId)
-                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Author>()
+       .HasIndex(a => a.Email)
+       .IsUnique();
 
 
 

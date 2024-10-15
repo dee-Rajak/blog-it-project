@@ -25,19 +25,29 @@ namespace BlogItAPI.Controllers
             _configuration = configuration;
         }
 
-        //Register
         [HttpPost("register")]
-        public IActionResult Register(Author author)
+        public async Task<IActionResult> Register(Author author)
         {
-            if(_context.Authors.Any(a=>a.Email == author.Email))
+            author.Email = author.Email.ToLower();
+
+            if (await _context.Authors.AnyAsync(a => a.Email == author.Email))
             {
-                return BadRequest("Email already exists");
+                return BadRequest("Email already exists.");
             }
-            else
+
+            try
             {
-                _context.Authors.Add(author);
-                _context.SaveChanges();
+                await _context.Authors.AddAsync(author);
+                await _context.SaveChangesAsync();
                 return Ok("Registration successful.");
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException?.Message.Contains("UNIQUE constraint failed") == true)
+                {
+                    return BadRequest("Email already exists.");
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred during registration.");
             }
         }
 
@@ -46,39 +56,35 @@ namespace BlogItAPI.Controllers
         {
             var loggingAuthor = _context.Authors.SingleOrDefault(a => a.Email == author.Email && a.Password == author.Password);
 
-            if(loggingAuthor == null)
+            if (loggingAuthor == null)
             {
                 return Unauthorized();
             }
 
             var token = GenerateJwtToken(loggingAuthor);
-            return Ok(new {Token= token, Id = loggingAuthor.Id, Name = loggingAuthor.Name});
+            return Ok(new { Token = token, Id = loggingAuthor.Id, Name = loggingAuthor.Name });
         }
 
         private object GenerateJwtToken(Author author)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SecretKey"]));
-            var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, author.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, author.Email),
-            
-        };
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, author.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, author.Email),
+            };
 
             var token = new JwtSecurityToken(
-           issuer: _configuration["JwtSettings:Issuer"],
-           audience: _configuration["JwtSettings:Audience"],
-           claims: claims,
-           expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpiryMinutes"])),
-           signingCredentials: creds
-       );
+                issuer: _configuration["JwtSettings:Issuer"],
+                audience: _configuration["JwtSettings:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:ExpiryMinutes"])),
+                signingCredentials: creds
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-
         }
     }
-
-   
 }
