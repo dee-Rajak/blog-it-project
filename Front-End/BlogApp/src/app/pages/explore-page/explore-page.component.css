@@ -1,140 +1,111 @@
+/* General styles for the explore page */
+.explore-page {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
 .search-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    width: 80%;
+  margin-bottom: 20px;
 }
 
 .search-bar {
-    width: 50rem;
-    height: 2rem;
-    /* margin-bottom: 20px; */
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
-.search-bar input {
-    width: 100%;
-    /* padding: 10px; */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+.search-button,
+.filter-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.filter-controls {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.search-button:hover,
+.filter-button:hover {
+  background-color: #0056b3;
 }
 
-.filter-controls button, .filter-controls select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-}
-
-.filter-controls button:hover, .filter-controls select:hover {
-    border-color: #009970;
-}
-
-
-.pagination-button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    cursor: pointer;
-    transition: border-color 0.3s;
-}
-
-.pagination-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.pagination-button:hover:not(:disabled) {
-    border-color: #009970;
-}
-
-.pagination-info {
-    font-size: 16px;
-    color: #666;
-}
-
-
-
-.fixed-image-container {
-  height: 200px;  
-  width: 100%;    
-  overflow: hidden; 
-}
-
-.fixed-image-container img {
-  width: 100%;    
-  height: 100%;   
-  object-fit: fill; 
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .card {
-  margin: 0 auto 20px auto;
-  cursor: pointer;
-  background: #ffffff;
-  border: 1px solid #233d4d;
-  width: 60%;
-  
-  border-radius: 20px;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-.floating-card {
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 80%;
-  max-width: 100rem;
-  padding: 20px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  overflow: hidden;
+  height: 300px; /* Set a fixed height for uniform size */
   display: flex;
   flex-direction: column;
-  overflow: auto; 
+  justify-content: space-between;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
 }
 
 .card-body {
-  display: flex;
-  align-items: center;
+  padding: 20px;
+  flex-grow: 1;
 }
 
 .card-title {
-  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
 }
 
 .card-subtitle {
-  margin: 0;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
 }
 
 .card-text {
-  margin: 10px 0;
+  font-size: 1rem;
+  color: #666;
 }
 
-body, html {
-  height: 100%;
-  overflow: auto;
+.blog-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.blog-stats .like-count,
+.blog-stats .comment-count {
+  font-size: 1rem;
+  color: #666;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.pagination-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin: 0 10px; /* Add margin to space buttons evenly */
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

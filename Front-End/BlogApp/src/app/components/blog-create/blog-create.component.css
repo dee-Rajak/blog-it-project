@@ -19,7 +19,7 @@
 .form-section {
   display: flex;
   flex-direction: column;
-  overflow-y: auto; 
+  overflow-y: auto;
   flex-grow: 1;
   margin-bottom: 20px;
 }
@@ -28,7 +28,8 @@
   margin-top: 10px;
 }
 
-.form-section input, .form-section textarea {
+.form-section input,
+.form-section textarea {
   margin-top: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -49,6 +50,7 @@
 }
 
 .preview {
+  background-color: black;
   flex: 1;
   overflow-y: auto;
   max-height: 300px;

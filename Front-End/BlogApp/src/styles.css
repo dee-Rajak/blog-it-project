@@ -1,62 +1,44 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  overflow-y: auto; /* Ensure the body can scroll */
+:root {
+  --primary-color: #4caf50;
+  --secondary-color: #ffffff;
+  --accent-color: #ffc107;
+  --text-color: #333;
+  --background-color: #f4f4f4;
+  --overlay-color: rgba(0, 0, 0, 0.3); /* Decreased the overlay opacity */
 }
 
-.text-container {
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
+body {
+  background: url("https://preview.redd.it/the-artwork-in-studio-ghibli-is-so-beautiful-i-have-this-as-v0-570ao61wfhx81.png?auto=webp&s=8f5e881ffe246bbd4a1b8d337da3f3e24c7c0ac1")
+    no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Arial", sans-serif;
+  position: relative;
+  z-index: 0;
+  animation: slideshow 20s infinite; /* Added animation for slideshow */
+}
+
+body::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
-  justify-content: center;
-  align-items: center;
-  font-size: 96px;
-  color: white;
-  opacity: 0.8;
-  user-select: none;
-  text-shadow: 1px 1px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 100%;
+  background-color: var(--overlay-color);
+  z-index: -1;
 }
 
-.main-container {
-  overflow: auto; /* Allow scrolling */
-  height: 100vh; /* Ensure full viewport height */
-}
-
-:root {
-  --color-bg1: rgb(108, 0, 162);
-  --color-bg2: rgb(0, 17, 82);
-  --color1: 18, 113, 255;
-  --color2: 221, 74, 255;
-  --color3: 100, 220, 255;
-  --color4: 200, 50, 50;
-  --color5: 180, 180, 50;
-  --color-interactive: 140, 100, 255;
-  --circle-size: 80%;
-  --blending: hard-light;
-}
-
-
-.gradient-bg {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
-  top: 0;
-  left: 0;
-
-  svg {
-    display: none;
+@keyframes slideshow {
+  0% {
+    background-image: url("https://preview.redd.it/the-artwork-in-studio-ghibli-is-so-beautiful-i-have-this-as-v0-570ao61wfhx81.png?auto=webp&s=8f5e881ffe246bbd4a1b8d337da3f3e24c7c0ac1");
   }
-
-
-  .gradients-container {
-    filter: url(#goo) blur(40px) ;
-    width: 100%;
-    height: 100%;
+  33% {
+    background-image: url("https://images8.alphacoders.com/135/1354012.png");
+  }
+  66% {
+    background-image: url("https://motionbgs.com/media/6199/coffee-shop.jpg");
+  }
+  100% {
+    background-image: url("https://cdn.openart.ai/stable_diffusion/12e28aedc2bf10b91a7aa554a84bab1bccbc0b44_2000x2000.webp");
   }
 }

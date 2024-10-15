@@ -1,51 +1,53 @@
+.custom-offcanvas {
+  background-color: #f8f9fa; /* Light background for offcanvas */
+  border-left: 1px solid #dee2e6; /* Subtle border */
+}
+
+.offcanvas-header {
+  background-color: #343a40; /* Dark header background */
+  color: white; /* Text color */
+  padding: 1rem; /* Increased padding */
+}
+
+.offcanvas-title {
+  font-size: 1.5rem; /* Larger title */
+  margin-bottom: 0; /* Remove default margin */
+}
+
+.offcanvas-body {
+  padding: 1.5rem; /* Increased padding for body */
+  font-size: 1rem; /* Readable font size */
+  color: #495057; /* Darker text color for body */
+}
+
+.offcanvas-footer {
+  padding: 1rem; /* Padding for footer buttons */
+  display: flex;
+  justify-content: space-between; /* Space buttons evenly */
+}
+
+.btn {
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+}
+
+.btn-dark:hover {
+  background-color: #212529; /* Darker on hover */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darker on hover */
+}
+
+/* Updated style for the navbar to match offcanvas */
 .new-nav {
-    background-color: #fff;
-    height: 120px;
-    margin: 20px;
-    border-radius: 15px;
-    padding: 0.5rem;
+  background-color: #f8f9fa; /* Light background for navbar */
+  color: #495057; /* Darker text color */
 }
-.navbar-brand {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 500;
-    color: #66019e;
-    font-size: 34px;
-    transition: 0.3s color;
+
+.navbar-nav .nav-link {
+  color: #495057; /* Darker text color for navbar links */
 }
-.navbar .navbar-nav {
-  flex: 1;
-  justify-content: center;
-}
-.navbar-toggler {
-    border: none;
-    font-size: 1.25rem;
-}
-.navbar-toggler:focus {
-    box-shadow: none;
-    outline: none;
-}
-.nav-link {
-    position: relative;
-    margin: 5px;
-    color: #666777;
-    font-weight: 500;
-}
-.nav-link:hover, .nav-link.active {
-    color: #000;
-}
-.nav-link::before{
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background-color: #66019e;
-    visibility: hidden;
-    transition: 0.3s ease-in-out;
-}
-.nav-link:hover::before, .nav-link.active::before {
-    width: 100%;
-    visibility: visible;
+
+.navbar-nav .nav-link:hover {
+  color: #212529; /* Darker on hover */
 }

@@ -1,32 +1,70 @@
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #343a40; /* Dark background for header */
+  padding: 15px 20px; /* Add padding for spacing */
+  border-radius: 10px; /* Rounded corners */
+  color: white; /* Text color */
+}
+
+.dashboard-title {
+  font-size: 1.75rem; /* Adjusted title size */
+  margin: 0; /* Remove default margin */
+}
+
+.create-button {
+  background-color: #007bff; /* Primary color */
+  color: white; /* Text color */
+  border: none;
+  padding: 10px 15px; /* Padding for button */
+  border-radius: 25px; /* Rounded corners */
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.create-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
 }
 
 .dashboard-container {
-  padding: 20px;
+  background-color: #f8f9fa; /* Light background for container */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding for content */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+  border-radius: 10px; /* Rounded corners for table */
+  overflow: hidden; /* Prevents border-radius from being overridden */
 }
 
-.table th,
-.table td {
-  padding: 10px;
-  border: 1px solid #ddd;
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #e9ecef; /* Alternate row color */
 }
 
-.table th {
-  background-color: #343a40;
-  color: white;
+.table-hover tbody tr:hover {
+  background-color: #ced4da; /* Row hover color */
 }
 
+.table-dark {
+  background-color: #343a40; /* Dark table header */
+  color: white; /* Text color */
+}
 
+.table-dark th {
+  padding: 10px; /* Padding for table header */
+}
+
+.table-dark td {
+  padding: 10px; /* Padding for table cells */
+}
+
+.btn {
+  border-radius: 25px; /* Rounded corners for buttons */
+  transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade for primary button hover */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darker shade for danger button hover */
+}

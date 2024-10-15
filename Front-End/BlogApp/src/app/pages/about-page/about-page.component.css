@@ -1,27 +1,50 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background for better contrast */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-    color: #1e3d34;  /* Emerald Green */
+h1,
+h2 {
+  color: #1e3d34; /* Emerald Green */
+  margin-bottom: 20px;
 }
 
-.lead {
-    color: #233d4d;  /* Slightly darker text color */
+.lead,
+p,
+ul li {
+  color: #233d4d; /* Coherent text color */
+  font-size: 1.1rem;
 }
 
 ul {
-    list-style-type: none;
-    padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 ul li {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 ul li::before {
-    content: "✔️";
-    margin-right: 10px;
-    color: #ff5c8a;  /* Pink Accent */
+  content: "✔️";
+  margin-right: 10px;
+  color: #ff5c8a; /* Pink Accent */
+}
+
+button.btn-primary {
+  background-color: #1e3d34; /* Match the heading color */
+  border-color: #1e3d34;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  color: #ffffff; /* Ensure button text is readable */
+}
+
+button.btn-primary:hover {
+  background-color: #164d3b; /* Slightly darker shade for hover effect */
+  border-color: #164d3b;
 }

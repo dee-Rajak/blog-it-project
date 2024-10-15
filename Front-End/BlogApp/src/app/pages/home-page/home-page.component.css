@@ -1,0 +1,47 @@
+.container {
+  max-width: 1200px; /* Container max width for larger screens */
+}
+
+.nav-item-link {
+  font-size: 16px; /* Reduced font size for the navigation links */
+  color: white; /* Text color for buttons */
+  padding: 8px 20px; /* Reduced padding around the links */
+  border-radius: 20px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  margin: 5px; /* Reduced spacing between buttons */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+  display: inline-block; /* Allow for padding and margin */
+}
+
+.button {
+  background: linear-gradient(
+    135deg,
+    rgba(18, 113, 255, 0.7),
+    rgba(221, 74, 255, 0.7)
+  ); /* Gradient background */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  padding: 8px 20px; /* Reduced padding for buttons */
+  font-size: 16px; /* Reduced font size for buttons */
+}
+
+.button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(18, 113, 255, 1),
+    rgba(221, 74, 255, 1)
+  ); /* Darker gradient on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.content-area {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparent background for content */
+  border-radius: 10px; /* Rounded corners for content area */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for content area */
+  padding: 20px; /* Padding for content */
+}

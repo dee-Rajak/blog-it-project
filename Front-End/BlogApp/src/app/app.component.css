@@ -1,23 +1,62 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   overflow-y: auto;
 }
 
+.gradient-bg {
+  position: fixed; /* Fixed to cover entire viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 221, 204, 0.7),
+    rgba(204, 228, 255, 0.7)
+  ); /* Base gradient */
+  animation: waveAnimation 10s ease infinite; /* Wave animation */
+  z-index: -1; /* Ensure it stays behind the content */
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow-y: auto;
+  height: 100%; /* Ensure it occupies full height */
+  position: relative; /* To keep content positioned correctly */
+  overflow-y: auto; /* Allow scrolling */
 }
 
 .hero-section {
-  flex: 1;
-  background-size: cover;
-  overflow-y: auto;
+  flex: 1; /* Allows it to grow and fill available space */
+  background-size: cover; /* Cover the background image if used */
+  overflow-y: auto; /* Allow scrolling within hero section */
 }
 
 .router-outlet {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1; /* Ensure it occupies available space */
+  overflow-y: auto; /* Allow scrolling */
+}
+
+@keyframes waveAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .gradient-bg {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 221, 204, 0.5),
+      rgba(204, 228, 255, 0.5)
+    ); /* Slightly lighter for mobile */
+  }
 }

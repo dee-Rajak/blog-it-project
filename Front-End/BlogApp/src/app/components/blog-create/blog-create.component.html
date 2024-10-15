@@ -8,13 +8,27 @@
   <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
     <div class="form-section">
       <label for="title">Title</label>
-      <input type="text" formControlName="title" placeholder="Blog Title" required>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Blog Title"
+        required
+      />
 
       <label for="description">Description</label>
-      <input type="text" formControlName="description" placeholder="Description" required>
+      <input
+        type="text"
+        formControlName="description"
+        placeholder="Description"
+        required
+      />
 
       <label for="featuredImageUrl">Featured Image URL</label>
-      <input type="text" formControlName="featuredImageUrl" placeholder="Image URL">
+      <input
+        type="text"
+        formControlName="featuredImageUrl"
+        placeholder="Image URL"
+      />
 
       <!-- <label for="authorId">Author ID</label>
       <input type="number" formControlName="authorId" placeholder="Author ID"> -->
@@ -22,16 +36,21 @@
       <label for="categoryId">Category ID</label>
       <select formControlName="categoryId">
         <!-- Populate this list with options from API call -->
-        <option *ngFor="let category of categoryList" [value]="category.Id">{{ category.Name }}</option>
+        <option *ngFor="let category of categoryList" [value]="category.Id">
+          {{ category.Name }}
+        </option>
       </select>
 
       <!-- <input type="number" formControlName="categoryId" placeholder="Category ID"> -->
 
       <label for="content">Content (Markdown)</label>
       <div class="content-section">
-        <textarea formControlName="content" placeholder="Write your markdown content here"></textarea>
-        <div class="preview">
-          <h4>Markdown Preview</h4>
+        <textarea
+          formControlName="content"
+          placeholder="Write your markdown content here"
+        ></textarea>
+        <div class="preview" style="color: black">
+          <h4 class="text-primary">Markdown Preview</h4>
           <markdown [data]="blogForm.get('content')?.value"></markdown>
         </div>
       </div>
