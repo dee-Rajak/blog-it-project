@@ -125,10 +125,10 @@ namespace BlogItAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BlogPostId")
+                    b.Property<int?>("BlogPostId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CommentAuthorId")
+                    b.Property<int?>("CommentAuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -155,10 +155,10 @@ namespace BlogItAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BlogPostId")
+                    b.Property<int?>("BlogPostId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -194,14 +194,11 @@ namespace BlogItAPI.Migrations
                     b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")
                         .WithMany("Comments")
                         .HasForeignKey("BlogPostId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BlogItAPI.Models.Author", "Author")
                         .WithMany("Comments")
-                        .HasForeignKey("CommentAuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CommentAuthorId");
 
                     b.Navigation("Author");
 
@@ -212,15 +209,12 @@ namespace BlogItAPI.Migrations
                 {
                     b.HasOne("BlogItAPI.Models.Author", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
                     b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")
                         .WithMany("Likes")
                         .HasForeignKey("BlogPostId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Author");
 

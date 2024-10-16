@@ -101,6 +101,13 @@ namespace BlogItAPI.Controllers
             return NoContent();
         }
 
+        [HttpGet("IsLiked")]
+        public async Task<IActionResult> IsLiked(int authorId, int blogPostId)
+        {
+            var liked = await _blogPostRepository.IsLikedAsync(authorId,blogPostId);
+            return Ok(liked);
+        }
+
     
     }
 }

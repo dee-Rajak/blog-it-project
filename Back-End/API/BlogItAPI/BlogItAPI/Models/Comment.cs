@@ -17,10 +17,10 @@ namespace BlogItAPI.Models
         public DateTime CreadtedDate { get; set; }
 
         [ForeignKey("BlogPost")]
-        public int BlogPostId { get; set; }
+        public int? BlogPostId { get; set; }
 
         [ForeignKey("Author")]
-        public int CommentAuthorId { get; set; }
+        public int? CommentAuthorId { get; set; }
 
         [JsonIgnore]
         public Author? Author { get; set; }

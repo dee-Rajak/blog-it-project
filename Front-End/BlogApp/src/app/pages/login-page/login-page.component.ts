@@ -22,21 +22,21 @@ export class LoginPageComponent {
   authorForm: FormGroup;
   loginForm: FormGroup;
 
-  constructor(private authorService: AuthorService, private authService: AuthService){
+  constructor(private authorService: AuthorService, private authService: AuthService) {
     this.authorForm = new FormGroup(
       {
         Name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        Email: new FormControl('',[Validators.required, Validators.email]),
+        Email: new FormControl('', [Validators.required, Validators.email]),
         Password: new FormControl('', [Validators.required])
       }
     );
     this.loginForm = new FormGroup({
-        Email: new FormControl('', [Validators.required, Validators.email]),
-        Password: new FormControl('', [Validators.required])
-      });
+      Email: new FormControl('', [Validators.required, Validators.email]),
+      Password: new FormControl('', [Validators.required])
+    });
   }
 
-  navigateToDashboard(){
+  navigateToDashboard() {
     this.router.navigateByUrl('/home/dashboard');
   }
 
@@ -47,7 +47,11 @@ export class LoginPageComponent {
         console.log('Author registered successfully', res);
         alert("Registered Succesfully, Now Login");
         this.authorForm.reset();
-      });
+      },
+        (error) => {
+          alert("Registration Failed: Email already exist.");
+        }
+      );
     }
   }
 

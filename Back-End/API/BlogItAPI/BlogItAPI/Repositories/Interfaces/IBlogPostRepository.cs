@@ -19,5 +19,7 @@ namespace BlogItAPI.Repositories.Interfaces
 
         Task LikePostAsync(int authorId, int blogPostId);
 
+        Task<string> IsLikedAsync(int authorId, int blogPostId);
+
     }
 }

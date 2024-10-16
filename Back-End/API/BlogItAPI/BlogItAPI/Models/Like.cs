@@ -11,7 +11,7 @@ namespace BlogItAPI.Models
         public int Id { get; set; }
 
         [ForeignKey("BlogPost")]
-        public int BlogPostId { get; set; }
+        public int? BlogPostId { get; set; }
 
         [JsonIgnore]
         public BlogPost? BlogPost { get; set; }
@@ -19,7 +19,7 @@ namespace BlogItAPI.Models
         [ForeignKey("Author")]
 
         
-        public int AuthorId { get; set; }
+        public int? AuthorId { get; set; }
 
         [JsonIgnore]
         public Author? Author {  get; set; }     

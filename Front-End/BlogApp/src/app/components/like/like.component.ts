@@ -22,10 +22,20 @@ export class LikeComponent implements OnInit {
     this.checkIfLiked();
   }
 
+  // checkIfLiked() {
+  //   const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+  //   debugger;
+  //   this.liked = likedPosts.includes(this.blogPostId);
+  // }
   checkIfLiked() {
-    const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+    const url = `https://localhost:7189/api/BlogPosts/IsLiked?authorId=${this.authorId}&blogPostId=${this.blogPostId}`;
     debugger;
-    this.liked = likedPosts.includes(this.blogPostId);
+    this.http.get<boolean>(url).subscribe(
+      (isLiked) => {
+        this.liked = isLiked;
+        debugger;
+      }
+    );
   }
 
   toggleLike() {
@@ -36,7 +46,7 @@ export class LikeComponent implements OnInit {
         () => {
           this.likes--;
           this.liked = false;
-          this.updateLikedPosts();
+          // this.updateLikedPosts();
           debugger;
           console.log('Blog unliked successfully');
         }
@@ -47,7 +57,7 @@ export class LikeComponent implements OnInit {
         () => {
           this.likes++;
           this.liked = true;
-          this.updateLikedPosts();
+          // this.updateLikedPosts();
           debugger;
           console.log('Blog liked successfully');
         }
@@ -55,28 +65,16 @@ export class LikeComponent implements OnInit {
     }
   }
 
-  updateLikedPosts() {
-    let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
-    if (this.liked) {
-      likedPosts.push(this.blogPostId);
-      debugger;
-    } else {
-      likedPosts = likedPosts.filter((id: number) => id !== this.blogPostId);
-      debugger;
-    }
-    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-    debugger;
-  }
-
-  // likeBlog() {
-  //   const url = `https://localhost:7189/api/BlogPosts/${this.blogPostId}/like?authorId=${this.authorId}&blogPostId=${this.blogPostId}`;
+  // updateLikedPosts() {
+  //   let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+  //   if (this.liked) {
+  //     likedPosts.push(this.blogPostId);
+  //     debugger;
+  //   } else {
+  //     likedPosts = likedPosts.filter((id: number) => id !== this.blogPostId);
+  //     debugger;
+  //   }
+  //   localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
   //   debugger;
-  //   this.http.post(url, {}).subscribe(
-  //     (res: any) => {
-  //       debugger;
-  //       this.likes++;
-  //       console.log('Blog liked successfully', res);
-  //     }
-  //   );
   // }
 }

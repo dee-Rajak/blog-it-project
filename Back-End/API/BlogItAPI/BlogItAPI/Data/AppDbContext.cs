@@ -21,21 +21,17 @@ namespace BlogItAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
 
-            // Prevent cascade delete for Likes -> BlogPost
-            modelBuilder.Entity<Like>()
-                .HasOne(l => l.BlogPost)
-                .WithMany(b => b.Likes)
-                .HasForeignKey(l => l.BlogPostId)
-                .OnDelete(DeleteBehavior.NoAction);
 
-            // Other relationships remain the same
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.BlogPost)
-                .WithMany(b => b.Comments)
-                .HasForeignKey(c => c.BlogPostId)
-                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<BlogPost>()
+                .HasMany(b => b.Comments)
+                .WithOne(c => c.BlogPost)
+                .OnDelete(DeleteBehavior.Cascade);
+
+                modelBuilder.Entity<BlogPost>()
+                .HasMany(b => b.Likes)
+                .WithOne(c => c.BlogPost)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Author>()
        .HasIndex(a => a.Email)

@@ -110,5 +110,17 @@ namespace BlogItAPI.Repositories.Implementations
               
             }
         }
+
+        public async Task<string> IsLikedAsync (int authorId, int blogPostId)
+        {
+            var existingLike = await _context.Likes.FirstOrDefaultAsync(l => l.AuthorId == authorId && l.BlogPostId == blogPostId);
+            if (existingLike != null)
+            {
+                return "true";
+            } else
+            {
+                return "false";
+            }
+        }
     }
 }
