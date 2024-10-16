@@ -1,0 +1,75 @@
+<header class="new-nav">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <h1 class="navbar-brand mb-0"><i class="bi bi-feather"></i> BlogIt!</h1>
+      </div>
+
+      <div class="col text-center">
+        <nav class="navbar navbar-expand-md">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link mx-lg-2" aria-current="page" routerLink="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-lg-2" routerLink="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mx-lg-2" routerLink="/team">Team</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="col-auto d-flex justify-content-end">
+        <button class="btn btn-dark rounded-pill d-none d-md-block" *ngIf="username" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvas">
+          Welcome, {{ username }}
+        </button>
+
+        <button class="btn btn-dark rounded-circle d-md-none" *ngIf="username" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvas" style="width: 40px; height: 40px; font-size: 18px">
+          {{ username.charAt(0) }}
+        </button>
+
+        <button class="btn btn-dark rounded-pill" *ngIf="!username" (click)="navigateToLogin()">
+          Register/Login
+        </button>
+      </div>
+    </div>
+
+    <div class="offcanvas offcanvas-end custom-offcanvas" tabindex="-1" id="offcanvas"
+      aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+          Welcome {{ username }}!
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="quote-container">
+          <blockquote class="quote-text">
+            "There is no greater agony than bearing an untold story inside you."
+          </blockquote>
+          <cite class="quote-author">— Maya Angelou</cite>
+        </div>
+      </div>
+
+      <div class="offcanvas-footer">
+        <button class="btn btn-dark rounded-pill" data-bs-dismiss="offcanvas" *ngIf="username" (click)="logout()">
+          Logout
+        </button>
+        <button class="btn btn-danger rounded-pill" data-bs-dismiss="offcanvas" *ngIf="username"
+          (click)="deleteAccount()">
+          Delete Account
+        </button>
+      </div>
+    </div>
+  </div>
+</header>

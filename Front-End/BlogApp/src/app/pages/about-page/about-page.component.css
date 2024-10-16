@@ -1,0 +1,50 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+  color: #1e3d34; 
+  margin-bottom: 20px;
+}
+
+.lead,
+p,
+ul li {
+  color: #233d4d; 
+  font-size: 1.1rem;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 10px;
+}
+
+ul li::before {
+  content: "✔️";
+  margin-right: 10px;
+  color: #ff5c8a; 
+}
+
+button.btn-primary {
+  background-color: #1e3d34; 
+  border-color: #1e3d34;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  color: #ffffff; 
+}
+
+button.btn-primary:hover {
+  background-color: #164d3b; 
+  border-color: #164d3b;
+}
