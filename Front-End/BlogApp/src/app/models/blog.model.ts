@@ -41,5 +41,6 @@ export interface BlogData {
   FeaturedImageUrl: string;
   AuthorId: number;
   AuthorName?: string;
+  CategoryName?: string;
   CategoryId: number;
 }

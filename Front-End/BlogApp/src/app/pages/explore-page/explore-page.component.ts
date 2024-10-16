@@ -32,7 +32,7 @@ export class ExplorePageComponent {
   pageNumber: number = 1;
   pageSize: number = 6;
 
-  constructor(private blogService: BlogService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient,private categoryService:CategoryService){
+  constructor(private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){
     this.searchBlogs();
   }
 
@@ -68,6 +68,9 @@ export class ExplorePageComponent {
         this.blogList.forEach(blog => {
           this.authorService.getAuthorName(blog.AuthorId).subscribe(author => {
             blog.AuthorName = author.Name;
+          });
+          this.categoryService.getCategoryById(blog.CategoryId).subscribe(category => {
+            blog.CategoryName = category.Name;
           });
         });
       }
