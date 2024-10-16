@@ -41,7 +41,7 @@ namespace BlogItAPI.Repositories.Implementations
 
             if(string.IsNullOrEmpty(query)==false)
             {
-                blogPosts = _context.BlogPosts.Where(x => x.Title.Contains(query));
+                blogPosts = _context.BlogPosts.Where(x => x.Title.Contains(query) || x.Author.Name.Contains(query) || x.Category.Name.Contains(query));
             }
 
 

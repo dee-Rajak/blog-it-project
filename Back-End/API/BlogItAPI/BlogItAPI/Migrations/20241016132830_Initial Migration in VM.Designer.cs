@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241015203308_InitialInit")]
-    partial class InitialInit
+    [Migration("20241016132830_Initial Migration in VM")]
+    partial class InitialMigrationinVM
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

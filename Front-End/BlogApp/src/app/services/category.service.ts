@@ -13,4 +13,6 @@ export class CategoryService {
   getCategories(){
     return this.http.get<any[]>(`${this.apiUrl}/getCategories`);
   }
+
+  
 }

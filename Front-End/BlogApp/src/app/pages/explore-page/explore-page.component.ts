@@ -10,6 +10,7 @@ import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CommentComponent } from '../../components/comment/comment.component';
 import { LikeComponent } from '../../components/like/like.component';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-explore-page',
@@ -24,13 +25,14 @@ export class ExplorePageComponent {
   blogList: BlogData[] = [];
   userId: any;
 
+
   query: string = '';
   sortBy: string = 'CreatedDate';
   sortDirection: string = 'Asc';
   pageNumber: number = 1;
   pageSize: number = 6;
 
-  constructor(private blogService: BlogService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){
+  constructor(private blogService: BlogService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient,private categoryService:CategoryService){
     this.searchBlogs();
   }
 
@@ -91,6 +93,8 @@ export class ExplorePageComponent {
   hasMoreBlogs(): boolean {
     return this.blogList.length === this.pageSize;
   }
+
+
 
   // getBlogs(){
   //   debugger;
