@@ -64,20 +64,6 @@ export class LoginPageComponent {
     }
   }
 
-  // onLogin(){
-  //   // debugger;
-  //   this.http.post("https://freeapi.miniprojectideas.com/api/User/Login", this.loginObj).subscribe(
-  //     (res: any)=>{
-  //       if(res.result) {
-  //         alert("Login Successful")
-  //         localStorage.setItem('UserToken', res.data.token)
-  //         this.router.navigateByUrl('home/dashboard')
-  //       } else {
-  //         alert("Login Failed")
-  //       }
-  //     }
-  //   )
-  // }
 }
 
 export interface AuthCredentials {

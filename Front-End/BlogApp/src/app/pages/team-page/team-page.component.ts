@@ -14,7 +14,7 @@ export class TeamPageComponent implements OnInit {
 
   teamMembers = [
     { name: 'Dhireen Kr. Rajak', photo: 'assets/images/photo1.jpg' },
-    { name: 'Nancy Saini', photo: 'assets/images/photo2.jpg' },
-    { name: 'Saurav Kumar', photo: 'assets/images/photo3.jpg' },
+    { name: 'Nancy Saini', photo: 'assets/images/photo2.jpeg' },
+    { name: 'Saurav Kumar', photo: 'assets/images/photo3.jpeg' },
   ];
 }

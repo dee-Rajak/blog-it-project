@@ -35,6 +35,7 @@
 
       <label for="categoryId">Category ID</label>
       <select formControlName="categoryId">
+        <option value="" disabled selected>Select a Category</option>
         <!-- Populate this list with options from API call -->
         <option *ngFor="let category of categoryList" [value]="category.Id">
           {{ category.Name }}
@@ -49,8 +50,8 @@
           formControlName="content"
           placeholder="Write your markdown content here"
         ></textarea>
-        <div class="preview" style="color: black">
-          <h4 class="text-primary">Markdown Preview</h4>
+        <div class="preview">
+          <h4>Markdown Preview</h4>
           <markdown [data]="blogForm.get('content')?.value"></markdown>
         </div>
       </div>

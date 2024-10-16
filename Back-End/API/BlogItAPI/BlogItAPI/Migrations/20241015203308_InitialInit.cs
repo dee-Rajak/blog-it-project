@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BlogItAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class CascadeDeleteProblemSolved : Migration
+    public partial class InitialInit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

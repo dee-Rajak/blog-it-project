@@ -2,7 +2,6 @@
 	<div class="main">
 		<input type="checkbox" id="chk" aria-hidden="true">
 
-		<!-- For Register -->
 		<div class="register">
 			<form [formGroup]="authorForm">
 				<label for="chk" aria-hidden="true">Register</label>
@@ -26,11 +25,9 @@
 				<button (click)="onRegister()" [disabled]="authorForm.invalid">Register</button>
 			</form>
 		</div>
-		<!-- For Login -->
 		<div class="login">
 			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 				<label for="chk" aria-hidden="true">Login</label>
-				<!-- <input type="text" formControlName="Name" name="txt" placeholder="User name" required> -->
 				<input type="email" formControlName="Email" name="email" placeholder="Email" required>
 				<div class="text-danger valid" *ngIf="loginForm.controls['Email'].touched">
 					<span *ngIf="loginForm.controls['Email'].errors?.['required']">Email is Required</span>

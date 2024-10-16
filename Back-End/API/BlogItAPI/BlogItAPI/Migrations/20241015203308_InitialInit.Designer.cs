@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogItAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241015070312_ContextUpdated")]
-    partial class ContextUpdated
+    [Migration("20241015203308_InitialInit")]
+    partial class InitialInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,9 @@ namespace BlogItAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Authors");
                 });
@@ -125,9 +128,6 @@ namespace BlogItAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BlogPostId")
                         .HasColumnType("int");
 
@@ -142,8 +142,6 @@ namespace BlogItAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.HasIndex("BlogPostId");
 
@@ -196,10 +194,6 @@ namespace BlogItAPI.Migrations
 
             modelBuilder.Entity("BlogItAPI.Models.Comment", b =>
                 {
-                    b.HasOne("BlogItAPI.Models.Author", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("AuthorId");
-
                     b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")
                         .WithMany("Comments")
                         .HasForeignKey("BlogPostId")
@@ -207,9 +201,9 @@ namespace BlogItAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("BlogItAPI.Models.Author", "Author")
-                        .WithMany()
+                        .WithMany("Comments")
                         .HasForeignKey("CommentAuthorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Author");
@@ -222,7 +216,7 @@ namespace BlogItAPI.Migrations
                     b.HasOne("BlogItAPI.Models.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BlogItAPI.Models.BlogPost", "BlogPost")

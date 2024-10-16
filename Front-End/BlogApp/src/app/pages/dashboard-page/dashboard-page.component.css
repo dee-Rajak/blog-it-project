@@ -1,70 +1,70 @@
 .dashboard-header {
-  background-color: #343a40; /* Dark background for header */
-  padding: 15px 20px; /* Add padding for spacing */
-  border-radius: 10px; /* Rounded corners */
-  color: white; /* Text color */
+  background-color: #343a40;
+  padding: 15px 20px; 
+  border-radius: 10px; 
+  color: white; 
 }
 
 .dashboard-title {
-  font-size: 1.75rem; /* Adjusted title size */
-  margin: 0; /* Remove default margin */
+  font-size: 1.75rem; 
+  margin: 0; 
 }
 
 .create-button {
-  background-color: #007bff; /* Primary color */
-  color: white; /* Text color */
+  background-color: #007bff; 
+  color: white; 
   border: none;
-  padding: 10px 15px; /* Padding for button */
-  border-radius: 25px; /* Rounded corners */
-  transition: background-color 0.3s; /* Transition for hover effect */
+  padding: 10px 15px; 
+  border-radius: 25px; 
+  transition: background-color 0.3s; 
 }
 
 .create-button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3; 
 }
 
 .dashboard-container {
-  background-color: #f8f9fa; /* Light background for container */
-  border-radius: 10px; /* Rounded corners */
-  padding: 20px; /* Padding for content */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #f8f9fa; 
+  border-radius: 10px; 
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
 }
 
 .table {
-  border-radius: 10px; /* Rounded corners for table */
-  overflow: hidden; /* Prevents border-radius from being overridden */
+  border-radius: 10px;
+  overflow: hidden; 
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
-  background-color: #e9ecef; /* Alternate row color */
+  background-color: #e9ecef; 
 }
 
 .table-hover tbody tr:hover {
-  background-color: #ced4da; /* Row hover color */
+  background-color: #ced4da; 
 }
 
 .table-dark {
-  background-color: #343a40; /* Dark table header */
-  color: white; /* Text color */
+  background-color: #343a40; 
+  color: white; 
 }
 
 .table-dark th {
-  padding: 10px; /* Padding for table header */
+  padding: 10px; 
 }
 
 .table-dark td {
-  padding: 10px; /* Padding for table cells */
+  padding: 10px; 
 }
 
 .btn {
-  border-radius: 25px; /* Rounded corners for buttons */
-  transition: background-color 0.3s; /* Transition for hover effect */
+  border-radius: 25px; 
+  transition: background-color 0.3s; 
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Darker shade for primary button hover */
+  background-color: #0056b3; 
 }
 
 .btn-danger:hover {
-  background-color: #c82333; /* Darker shade for danger button hover */
+  background-color: #c82333; 
 }

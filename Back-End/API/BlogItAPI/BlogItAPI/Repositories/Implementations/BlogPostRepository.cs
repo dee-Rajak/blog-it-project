@@ -59,7 +59,7 @@ namespace BlogItAPI.Repositories.Implementations
                 if(string.Equals(sortBy,"Likes",StringComparison.OrdinalIgnoreCase))
                 {
                     var isAsc = string.Equals(sortDirection,"Asc",StringComparison.OrdinalIgnoreCase) ? true : false;
-                    blogPosts = isAsc? blogPosts.OrderBy(x=>x.Likes) : blogPosts.OrderByDescending(x=>x.Likes);
+                    blogPosts = isAsc? blogPosts.OrderBy(x=>x.LikeCount) : blogPosts.OrderByDescending(x=>x.LikeCount);
                 }
 
                 if(string.Equals(sortBy, "CreatedDate", StringComparison.OrdinalIgnoreCase))

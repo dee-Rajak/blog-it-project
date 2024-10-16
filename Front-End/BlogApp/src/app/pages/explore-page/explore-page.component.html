@@ -1,62 +1,58 @@
 <div class="search-section mb-4">
-  <div class="filter-controls d-flex justify-content-center align-items-center">
-    <input
-      type="text"
-      class="search-bar"
-      placeholder="Search blogs..."
-      [(ngModel)]="query"
-      (input)="searchBlogs()"
-    />
-    <button class="search-button" (click)="searchBlogs()">Search</button>
-    <button class="filter-button" (click)="toggleSortDirection()">
-      Sort: {{ sortDirection === "Asc" ? "Ascending" : "Descending" }}
-    </button>
+  <div class="filter-controls row justify-content-center align-items-center">
+    <div class="col-12 col-md-auto mb-2 mb-md-0">
+      <select class="filter-button form-control" [(ngModel)]="sortBy" (change)="searchBlogs()">
+        <option value="CreatedDate">Created Date</option>
+        <option value="Likes">Likes</option>
+        <option value="Title">Title</option>
+      </select>
+    </div>
+    <div class="col-12 col-md-auto mb-2 mb-md-0">
+      <input
+        type="text"
+        class="search-bar form-control"
+        placeholder="Search blogs..."
+        [(ngModel)]="query"
+        (input)="searchBlogs()"
+      />
+    </div>
+    <div class="col-12 col-md-auto mb-2 mb-md-0">
+      <button class="search-button btn btn-primary w-100" (click)="searchBlogs()">Search</button>
+    </div>
+    <div class="col-12 col-md-auto">
+      <button class="filter-button btn btn-primary w-100" (click)="toggleSortDirection()">
+        Sort: {{ sortDirection === "Asc" ? "Ascending" : "Descending" }}
+      </button>
+    </div>
   </div>
 </div>
 
 <div class="card-container">
   <div class="card" *ngFor="let blog of blogList" (click)="showContent(blog)">
+    <img [src]="blog.FeaturedImageUrl" class="card-img-top" alt="Featured Image" />
     <div class="card-body">
-      <div class="row">
-        <div class="col-12 col-md-4 image-container">
-          <img
-            [src]="blog.FeaturedImageUrl"
-            class="img-fluid"
-            alt="Featured Image"
-          />
-        </div>
-        <div class="col-12 col-md-8">
-          <h5 class="card-title">{{ blog.Title }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{ blog.AuthorName }}</h6>
-          <p class="card-text">{{ blog.Description }}</p>
-          <div class="blog-stats">
-            <span class="like-count">
-              <i class="bi bi-heart-fill"></i> {{ blog.LikeCount }}
-            </span>
-            <span class="comment-count">
-              <i class="bi bi-chat-text-fill"></i> {{ blog.Comments.length }}
-            </span>
-          </div>
-        </div>
+      <h5 class="card-title">{{ blog.Title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ blog.AuthorName }}</h6>
+      <div class="blog-stats">
+        <span class="like-count">
+          <i class="bi bi-heart-fill"></i> {{ blog.LikeCount }}
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span class="comment-count">
+          <i class="bi bi-chat-text-fill"></i> {{ blog.Comments.length }}
+        </span>
       </div>
+      <p class="card-text">{{ blog.Description }}</p>
     </div>
   </div>
 </div>
 
 <div class="pagination-controls d-flex justify-content-center mb-5">
-  <button
-    class="pagination-button"
-    (click)="previousPage()"
-    [disabled]="pageNumber <= 1"
-  >
+  <button class="pagination-button" (click)="previousPage()" [disabled]="pageNumber <= 1">
     Previous
   </button>
   <span class="pagination-info">Page {{ pageNumber }}</span>
-  <button
-    class="pagination-button"
-    (click)="nextPage()"
-    [disabled]="!hasMoreBlogs()"
-  >
+  <button class="pagination-button" (click)="nextPage()" [disabled]="!hasMoreBlogs()">
     Next
   </button>
 </div>
@@ -65,7 +61,7 @@
   <div class="card-content">
     <div class="card-body row justify-content-between">
       <div class="col-10">
-        <h5 class="mb-2 card-title">{{ selectedBlog.Title }}</h5>
+        <h3 class="mb-2 card-title" style="font-size: 2rem;">{{ selectedBlog.Title }}</h3>
       </div>
       <div class="col d-flex justify-content-end">
         <button class="btn btn-dark" (click)="closeContent()">
@@ -73,21 +69,28 @@
         </button>
       </div>
     </div>
-    <div>
-      <p>Published On: {{ selectedBlog.UpdatedDate | date }}</p>
+    <div class="mx-4">
+      <div>
+        <p>Published On: {{ selectedBlog.UpdatedDate | date }}</p>
+      </div>
+      <app-like [authorId]="userId" [blogPostId]="selectedBlog.Id" [likes]="selectedBlog.LikeCount"></app-like>
+      <br />
+      <h6 class="card-subtitle mb-2 text-muted">
+        ~ by {{ selectedBlog.AuthorName }}
+      </h6>
+      <br />
+      <div class="row">
+        <div class="col">
+          <div class="mx-3">
+            <img [src]="selectedBlog.FeaturedImageUrl" class="img-fluid float-end me-3" alt="Featured Image"
+              style="width: 300px;" />
+          </div>
+          <markdown [data]="selectedBlog.Content"></markdown>
+        </div>
+      </div>
+      <hr />
+      <h3>Comments:</h3>
+      <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
     </div>
-    <app-like
-      [authorId]="userId"
-      [blogPostId]="selectedBlog.Id"
-      [likes]="selectedBlog.LikeCount"
-    ></app-like>
-    <br />
-    <h6 class="card-subtitle mb-2 text-muted">
-      ~ by {{ selectedBlog.AuthorName }}
-    </h6>
-    <br />
-    <markdown [data]="selectedBlog.Content"></markdown>
-    <hr />
-    <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
   </div>
 </div>
