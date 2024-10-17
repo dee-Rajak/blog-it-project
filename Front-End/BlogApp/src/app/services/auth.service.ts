@@ -10,17 +10,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(credentials: AuthCredentials): Observable<any> {
-    return this.http.post<any>('https://localhost:7189/api/Auth/login', credentials).pipe(
-      tap(response => {
-        if (response.Token) {
-          debugger;
-          localStorage.setItem('token', response.Token);
-          localStorage.setItem('userId', response.Id.toString());
-          localStorage.setItem('userName', response.Name);
-        }
-      })
-    );
+  login(credentials: AuthCredentials) {
+    return this.http.post('https://localhost:7189/api/Auth/login', credentials);
   }
 
   logout() {

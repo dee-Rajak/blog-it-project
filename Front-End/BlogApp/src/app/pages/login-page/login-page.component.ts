@@ -43,35 +43,44 @@ export class LoginPageComponent {
   onRegister() {
     if (this.authorForm.valid) {
       const author: Author = this.authorForm.value;
-      this.authorService.registerAuthor(author).subscribe((res: Author) => {
-        console.log('Author registered successfully', res);
-        alert("Registered Succesfully, Now Login");
-        this.authorForm.reset();
-      },
-        (error) => {
-          alert("Registration Failed: Email already exist.");
+      this.authorService.registerAuthor(author).subscribe({
+        next: (res: Author) => {
+          console.log('Author registered successfully', res);
+          alert("Registered Succesfully, Now Login");
+          this.authorForm.reset();
+        },
+        error: (error) => {
+          alert("Registration Failed: Check Credentials!");
         }
-      );
+      });
     }
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe(
-        () => {
+      this.authService.login(this.loginForm.value).subscribe({
+        next: (response: any) => {
+          if (response.Token) {
+            debugger;
+            localStorage.setItem('token', response.Token);
+            localStorage.setItem('userId', response.Id.toString());
+            localStorage.setItem('userName', response.Name);
+          }
           debugger;
           console.log('Login Successful');
           debugger;
           this.navigateToDashboard();
+        },
+        error: (error) => {
+          alert("Login Failed: Check Credentials!");
         }
-      )
+      })
     }
   }
 
 }
 
 export interface AuthCredentials {
-  Name: string;
   Email: string;
   Password: string;
 }

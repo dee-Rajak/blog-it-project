@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Category } from '../../models/category.model';
 import { CommonModule } from '@angular/common';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-blog-create',
@@ -24,7 +25,7 @@ export class BlogCreateComponent implements OnInit{
   categoryList!: Category[];
 
 
-  constructor(private blogService: BlogService, private authService: AuthService, private router: Router, private http: HttpClient){
+  constructor(private categoryService: CategoryService, private blogService: BlogService, private authService: AuthService, private router: Router, private http: HttpClient){
     this.getCategories();
   }
 
@@ -39,7 +40,7 @@ export class BlogCreateComponent implements OnInit{
   }
 
   getCategories(){
-    this.http.get('https://localhost:7189/api/Categories/getCategories').subscribe(
+    this.categoryService.getCategories().subscribe(
       (res: any) => {
         debugger;
         this.categoryList = res;
@@ -81,29 +82,6 @@ export class BlogCreateComponent implements OnInit{
       this.router.navigateByUrl('/home/explore')
     }
   }
-
-  // onSubmit() {
-  //   if (this.blogForm.valid) {
-  //     const blog = new Blog(
-  //       this.blogForm.value.title,
-  //       this.blogForm.value.description,
-  //       this.blogForm.value.content,
-  //       this.blogForm.value.featuredImageUrl,
-  //       // this.blogForm.value.authorId,
-  //       parseInt(this.authService.getUserId() || '0', 10),
-  //       this.blogForm.value.categoryId
-  //     );
-      
-  //     debugger;
-  //     console.log('Blog data:', blog);
-  //     this.blogService.createBlog(blog).subscribe(
-  //       (response: Blog) => {
-  //       console.log('Blog created successfully', response);
-  //       this.blogForm.reset();
-  //     });
-  //   }
-  //   this.router.navigateByUrl('/home/explore');
-  // }
 
   closeForm() {
     this.close.emit();

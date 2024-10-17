@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit{
     this.username = null;
     this.router.navigateByUrl('home/explore');
   }
+  
   deleteAccount(){
     alert("Are you sure about this ?");
     this.authorService.delete(this.userId!).subscribe(
