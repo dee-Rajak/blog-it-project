@@ -26,13 +26,13 @@ export class LoginPageComponent {
     this.authorForm = new FormGroup(
       {
         Name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        Email: new FormControl('', [Validators.required, Validators.email]),
-        Password: new FormControl('', [Validators.required])
+        Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+        Password: new FormControl('', [Validators.required, Validators.minLength(8)])
       }
     );
     this.loginForm = new FormGroup({
-      Email: new FormControl('', [Validators.required, Validators.email]),
-      Password: new FormControl('', [Validators.required])
+      Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      Password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 
@@ -45,12 +45,14 @@ export class LoginPageComponent {
       const author: Author = this.authorForm.value;
       this.authorService.registerAuthor(author).subscribe({
         next: (res: Author) => {
+          debugger;
           console.log('Author registered successfully', res);
           alert("Registered Succesfully, Now Login");
           this.authorForm.reset();
         },
         error: (error) => {
-          alert("Registration Failed: Check Credentials!");
+          debugger;
+          alert(error.error);
         }
       });
     }
@@ -60,6 +62,7 @@ export class LoginPageComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
+          debugger;
           if (response.Token) {
             debugger;
             localStorage.setItem('token', response.Token);
@@ -72,7 +75,8 @@ export class LoginPageComponent {
           this.navigateToDashboard();
         },
         error: (error) => {
-          alert("Login Failed: Check Credentials!");
+          debugger;
+          alert(error.error);
         }
       })
     }

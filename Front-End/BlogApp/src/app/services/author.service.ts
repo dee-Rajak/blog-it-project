@@ -10,13 +10,13 @@ export class AuthorService {
 
   constructor(private http: HttpClient) { }
 
-  registerAuthor(author: Author){
-    return this.http.post<Author>("https://localhost:7189/api/Authors", author);
+  registerAuthor(author: Author) {
+    return this.http.post<Author>("https://localhost:7189/api/Auth/register", author);
   }
   getAuthorName(authorId: number): Observable<any> {
     return this.http.get<any>(`https://localhost:7189/api/Authors/${authorId}`);
   }
-  delete(authorId: string){
+  delete(authorId: string) {
     return this.http.delete(`https://localhost:7189/api/Authors/${authorId}`);
   }
 }

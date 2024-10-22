@@ -21,6 +21,8 @@ namespace BlogItAPI.Controllers
         public async Task<IActionResult> GetAuthors()
         {
             var authors = await _authorRepository.GetAllAuthorsAsync();
+            
+         
             return Ok(authors);
         }
 
@@ -32,6 +34,7 @@ namespace BlogItAPI.Controllers
             {
                 return NotFound();
             }
+            
 
             return Ok(author);
         }

@@ -15,11 +15,14 @@
 				<div class="text-danger valid" *ngIf="authorForm.controls['Email'].touched">
 					<span *ngIf="authorForm.controls['Email'].errors?.['required']">Email is Required</span>
 					<span *ngIf="authorForm.controls['Email'].errors?.['email']">Email Format is Incorrect</span>
+					<small *ngIf="authorForm.controls['Email'].errors?.['pattern']" class="text-danger">Please provide a
+						valid email address</small>
 				</div>
 
 				<input type="password" formControlName="Password" name="pswd" placeholder="Password">
 				<div class="text-danger valid" *ngIf="authorForm.controls['Password'].touched">
 					<span *ngIf="authorForm.controls['Password'].errors?.['required']">Password is Required</span>
+					<span *ngIf="authorForm.controls['Password'].errors?.['minlength']">Min 8 Characters Required</span>
 				</div>
 
 				<button (click)="onRegister()" [disabled]="authorForm.invalid">Register</button>
@@ -32,11 +35,14 @@
 				<div class="text-danger valid" *ngIf="loginForm.controls['Email'].touched">
 					<span *ngIf="loginForm.controls['Email'].errors?.['required']">Email is Required</span>
 					<span *ngIf="loginForm.controls['Email'].errors?.['email']">Email Format is Incorrect</span>
+					<small *ngIf="loginForm.controls['Email'].errors?.['pattern']" class="text-danger">Please provide a
+						valid email address</small>
 				</div>
 
 				<input type="password" formControlName="Password" name="pswd" placeholder="Password" required>
 				<div class="text-danger valid" *ngIf="loginForm.controls['Password'].touched">
 					<span *ngIf="loginForm.controls['Password'].errors?.['required']">Password is Required</span>
+					<span *ngIf="loginForm.controls['Password'].errors?.['minlength']">Min 8 Characters Required</span>
 				</div>
 
 				<button type="submit" [disabled]="loginForm.invalid">Login</button>

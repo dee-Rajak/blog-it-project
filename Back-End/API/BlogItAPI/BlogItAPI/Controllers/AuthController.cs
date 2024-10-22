@@ -33,32 +33,41 @@ namespace BlogItAPI.Controllers
             if (await _context.Authors.AnyAsync(a => a.Email == author.Email))
             {
                 return BadRequest("Email already exists.");
-            }
-
-            try
+            } else
             {
                 await _context.Authors.AddAsync(author);
                 await _context.SaveChangesAsync();
-                return Ok("Registration successful.");
+                //return CreatedAtAction(nameof(GetAuthorById), new { id = author.Id }, author);
+                return Ok(author);
             }
-            catch (DbUpdateException ex)
-            {
-                if (ex.InnerException?.Message.Contains("UNIQUE constraint failed") == true)
-                {
-                    return BadRequest("Email already exists.");
-                }
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred during registration.");
-            }
+
+
+            //try
+            //{
+            //await _context.Authors.AddAsync(author);
+            //await _context.SaveChangesAsync();
+            //return Ok("Registration successful.");
+            //}
+            //catch (DbUpdateException ex)
+            //{
+            //    if (ex.InnerException?.Message.Contains("UNIQUE constraint failed") == true)
+            //    {
+            //        return BadRequest("Email already exists.");
+            //    }
+            //    return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred during registration.");
+            //}
         }
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] Author author)
         {
+            var authorExist = _context.Authors.SingleOrDefault(a => a.Email == author.Email);
+            if (authorExist == null) { return BadRequest("Email Not Registered"); }
             var loggingAuthor = _context.Authors.SingleOrDefault(a => a.Email == author.Email && a.Password == author.Password);
 
             if (loggingAuthor == null)
             {
-                return Unauthorized();
+                return BadRequest("Invalid Credentials");
             }
 
             var token = GenerateJwtToken(loggingAuthor);
