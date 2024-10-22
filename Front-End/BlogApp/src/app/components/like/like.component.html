@@ -1,4 +1,4 @@
-<button class="btn btn-outline-primary" (click)="toggleLike()">
+<button class="btn btn-outline-primary" (click)="toggleLike()" [disabled]="authorId==null">
   <i class="bi" [ngClass]="{'bi-hand-thumbs-up': !liked, 'bi-hand-thumbs-down': liked}"></i>
   {{ liked ? 'Unlike' : 'Like' }} {{ likes }}
 </button>
