@@ -33,6 +33,18 @@ namespace BlogItAPI.Data
                 .WithOne(c => c.BlogPost)
                 .OnDelete(DeleteBehavior.Cascade);
 
+              modelBuilder.Entity<Author>()
+                .HasMany(b=>b.BlogPosts)
+                .WithOne(c => c.Author)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Author>()
+                .HasMany(b => b.Comments)
+                .WithOne(c => c.Author)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+
+
             modelBuilder.Entity<Author>()
        .HasIndex(a => a.Email)
        .IsUnique();
