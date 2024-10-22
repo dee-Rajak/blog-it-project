@@ -32,7 +32,8 @@ export class LoginPageComponent {
     );
     this.loginForm = new FormGroup({
       Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      Password: new FormControl('', [Validators.required, Validators.minLength(8)])
+      Password: new FormControl('', [Validators.required])
+      // Password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 

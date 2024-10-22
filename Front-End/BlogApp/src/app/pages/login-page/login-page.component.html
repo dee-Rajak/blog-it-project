@@ -42,7 +42,7 @@
 				<input type="password" formControlName="Password" name="pswd" placeholder="Password" required>
 				<div class="text-danger valid" *ngIf="loginForm.controls['Password'].touched">
 					<span *ngIf="loginForm.controls['Password'].errors?.['required']">Password is Required</span>
-					<span *ngIf="loginForm.controls['Password'].errors?.['minlength']">Min 8 Characters Required</span>
+					<!-- <span *ngIf="loginForm.controls['Password'].errors?.['minlength']">Min 8 Characters Required</span> -->
 				</div>
 
 				<button type="submit" [disabled]="loginForm.invalid">Login</button>
