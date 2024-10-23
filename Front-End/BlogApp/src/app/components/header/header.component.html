@@ -73,3 +73,19 @@
     </div>
   </div>
 </header>
+
+<!-- Dark Background Overlay -->
+<div *ngIf="showDeleteConfirm" class="overlay" (click)="cancelDelete()"></div>
+
+<div *ngIf="showDeleteConfirm" class="floating-card-confirmation">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Confirm Account Deletion</h5>
+      <p class="card-text">Are you sure you want to delete your account? This action cannot be undone.</p>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
+        <button class="btn btn-danger" (click)="confirmDeleteAccount()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

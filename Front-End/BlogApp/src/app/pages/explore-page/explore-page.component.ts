@@ -27,7 +27,7 @@ export class ExplorePageComponent {
 
   query: string = '';
   sortBy: string = 'CreatedDate';
-  sortDirection: string = 'Asc';
+  sortDirection: string = 'Dsc';
   pageNumber: number = 1;
   pageSize: number = 3;
 
