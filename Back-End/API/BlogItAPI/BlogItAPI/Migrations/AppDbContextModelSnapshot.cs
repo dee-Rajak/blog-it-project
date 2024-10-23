@@ -48,7 +48,7 @@ namespace BlogItAPI.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>
@@ -95,7 +95,7 @@ namespace BlogItAPI.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("BlogPosts", (string)null);
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.Category", b =>
@@ -114,7 +114,7 @@ namespace BlogItAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.Comment", b =>
@@ -144,7 +144,7 @@ namespace BlogItAPI.Migrations
 
                     b.HasIndex("CommentAuthorId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.Like", b =>
@@ -167,7 +167,7 @@ namespace BlogItAPI.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("Likes");
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("BlogItAPI.Models.BlogPost", b =>

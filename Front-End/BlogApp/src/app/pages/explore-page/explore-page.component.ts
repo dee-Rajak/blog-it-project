@@ -95,4 +95,34 @@ export class ExplorePageComponent {
   hasMoreBlogs(): boolean {
     return this.blogList.length === this.pageSize;
   }
+
+  share(platform: string, blog: BlogData) {
+    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; // Replace with the actual blog URL
+    const title = blog.Title;
+    const description = blog.Description;
+  
+    switch (platform) {
+      case 'facebook':
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        break;
+        case 'instagram':
+          
+          window.open(`https://www.instagram.com/?url=${encodeURIComponent(url)}`, '_blank');
+          alert('Please copy the link and share it in your Instagram story or post.'); // Prompt user
+          break;
+      case 'linkedin':
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        break;
+    }
+  }
+  
+  copyToClipboard(blog: BlogData) {
+    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; // Replace with the actual blog URL
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Link copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  }
+  
 }

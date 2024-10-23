@@ -27,6 +27,8 @@ body::before {
   z-index: -1;
 }
 
+
+
 @keyframes slideshow {
   0% {
     background-image: url("https://preview.redd.it/the-artwork-in-studio-ghibli-is-so-beautiful-i-have-this-as-v0-570ao61wfhx81.png?auto=webp&s=8f5e881ffe246bbd4a1b8d337da3f3e24c7c0ac1");
