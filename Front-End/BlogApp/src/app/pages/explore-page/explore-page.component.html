@@ -21,7 +21,10 @@
     </div>
     <div class="col-12 col-md-auto">
       <button class="filter-button btn btn-primary w-100" (click)="toggleSortDirection()">
-        Sort: {{ sortDirection === "Asc" ? "Ascending" : "Descending" }}
+        <!-- Sort: {{ sortDirection === "Asc" ? "Ascending" : "Descending" }} -->
+        <!-- <i class="bi bi-sort-alpha-down"></i> -->
+        <!-- <i class="bi bi-sort-alpha-up"></i> -->
+        Sort: <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortDirection === 'Asc', 'bi bi-sort-alpha-up': sortDirection !== 'Asc'}"></i>
       </button>
     </div>
   </div>

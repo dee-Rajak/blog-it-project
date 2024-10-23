@@ -6,6 +6,7 @@ import { AuthorService } from '../../services/author.service';
 import { Author } from '../../models/author.model';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-page',
@@ -22,7 +23,7 @@ export class LoginPageComponent {
   authorForm: FormGroup;
   loginForm: FormGroup;
 
-  constructor(private authorService: AuthorService, private authService: AuthService) {
+  constructor(private authorService: AuthorService, private authService: AuthService, private toastr: ToastrService) {
     this.authorForm = new FormGroup(
       {
         Name: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -32,8 +33,8 @@ export class LoginPageComponent {
     );
     this.loginForm = new FormGroup({
       Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      Password: new FormControl('', [Validators.required])
-      // Password: new FormControl('', [Validators.required, Validators.minLength(8)])
+      // Password: new FormControl('', [Validators.required])
+      Password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 
@@ -48,12 +49,21 @@ export class LoginPageComponent {
         next: (res: Author) => {
           debugger;
           console.log('Author registered successfully', res);
-          alert("Registered Succesfully, Now Login");
+          // alert("Registered Succesfully, Now Login");
+          this.toastr.success("You may login now. 😊", "Registration Successfull", {
+            timeOut: 5000,
+          });
           this.authorForm.reset();
         },
         error: (error) => {
           debugger;
-          alert(error.error);
+          this.toastr.error(error.error, "Registration Error", {
+            timeOut: 5000,
+          });
+          // alert(error.error);
+          // this.toastrService.error('everything is broken', 'Major Error', {
+          //   timeOut: 3000,
+          // });
         }
       });
     }
@@ -77,7 +87,10 @@ export class LoginPageComponent {
         },
         error: (error) => {
           debugger;
-          alert(error.error);
+          this.toastr.error(error.error, "Login Error", {
+            timeOut: 5000,
+          });
+          // alert(error.error);
         }
       })
     }

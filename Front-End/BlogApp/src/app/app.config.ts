@@ -6,12 +6,16 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { customInterceptor } from './interceptor/custom.interceptor';
 import { MarkdownModule, provideMarkdown } from 'ngx-markdown';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { provideToastr } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([customInterceptor])), provideZoneChangeDetection({ eventCoalescing: true }),
     provideMarkdown(),
     provideRouter(routes),
+    provideToastr(),
+    provideAnimations(),
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     JwtHelperService
   ]
