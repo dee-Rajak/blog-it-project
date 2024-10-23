@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { Blog } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
@@ -30,12 +30,34 @@ export class BlogCreateComponent implements OnInit{
   }
 
   ngOnInit() {
+    // this.blogForm = new FormGroup({
+    //   title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : ''),
+    //   description: new FormControl(this.blogToEdit ? this.blogToEdit.Description : ''),
+    //   content: new FormControl(this.blogToEdit ? this.blogToEdit.Content : ''),
+    //   featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : ''),
+    //   categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '')
+    // });
     this.blogForm = new FormGroup({
-      title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : ''),
-      description: new FormControl(this.blogToEdit ? this.blogToEdit.Description : ''),
-      content: new FormControl(this.blogToEdit ? this.blogToEdit.Content : ''),
-      featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : ''),
-      categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '')
+      title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : '', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(100)
+      ]),
+      description: new FormControl(this.blogToEdit ? this.blogToEdit.Description : '', [
+        Validators.required,
+        Validators.minLength(20),
+        Validators.maxLength(300)
+      ]),
+      content: new FormControl(this.blogToEdit ? this.blogToEdit.Content : '', [
+        Validators.required,
+        Validators.minLength(50)
+      ]),
+      featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : '', [
+        Validators.pattern('https?://.+')
+      ]),
+      categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '', [
+        Validators.required
+      ])
     });
   }
 

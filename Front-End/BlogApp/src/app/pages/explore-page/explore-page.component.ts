@@ -29,7 +29,7 @@ export class ExplorePageComponent {
   sortBy: string = 'CreatedDate';
   sortDirection: string = 'Asc';
   pageNumber: number = 1;
-  pageSize: number = 6;
+  pageSize: number = 3;
 
   constructor(private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){
     this.searchBlogs();
