@@ -2,6 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta property="og:title" content="{{blog.Title}}" />
+  <meta property="og:description" content="{{blog.Description}}" />
+  <meta property="og:url" content="https://localhost:7189/api/BlogPosts/{{blog.Id}}" />
+  <meta property="og:image" content="{{blog.FeaturedImageUrl}}" />
+  
+
+  <meta name="twitter:title" content="{{blog.Title}}" />
+  <meta name="twitter:description" content="{{blog.Description}}" />
+  <meta name="twitter:image" content="{{blog.FeaturedImageUrl}}" />
+  <meta name="twitter:card" content="{{blog.FeaturedImageUrl}}" />
+
   <title>BlogApp</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">

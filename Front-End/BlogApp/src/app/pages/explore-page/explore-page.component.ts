@@ -1,15 +1,16 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { AuthorService } from '../../services/author.service';
-import { BlogData } from '../../models/blog.model';
+import { Blog, BlogData } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CommentComponent } from '../../components/comment/comment.component';
 import { LikeComponent } from '../../components/like/like.component';
 import { CategoryService } from '../../services/category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-explore-page',
@@ -18,8 +19,7 @@ import { CategoryService } from '../../services/category.service';
   templateUrl: './explore-page.component.html',
   styleUrl: './explore-page.component.css'
 })
-
-export class ExplorePageComponent {
+export class ExplorePageComponent implements OnInit {
   selectedBlog: any = null;
   blogList: BlogData[] = [];
   userId: any;
@@ -30,22 +30,71 @@ export class ExplorePageComponent {
   sortDirection: string = 'Dsc';
   pageNumber: number = 1;
   pageSize: number = 3;
-  selectedCategoryId:number | null = null;
+  selectedCategoryId: number | null = null;
 
-  constructor(private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){
+  constructor(private toastr: ToastrService, private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient) {
     this.searchBlogs();
   }
 
   ngOnInit(): void {
     this.searchBlogs();
     this.loadCategories();
-    // this.getBlogs();
   }
-
 
   showContent(blog: BlogData) {
     this.selectedBlog = blog;
     this.userId = this.authService.getUserId();
+    this.setOpenGraphTags(blog);
+  }
+
+  setOpenGraphTags(blog: BlogData) {
+    const head = document.getElementsByTagName('head')[0];
+
+    // Remove existing Open Graph tags
+    const existingTags = head.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]');
+    existingTags.forEach(tag => head.removeChild(tag));
+
+    // Open Graph tags
+    const titleTag = document.createElement('meta');
+    titleTag.setAttribute('property', 'og:title');
+    titleTag.setAttribute('content', blog.Title);
+    head.appendChild(titleTag);
+
+    const descriptionTag = document.createElement('meta');
+    descriptionTag.setAttribute('property', 'og:description');
+    descriptionTag.setAttribute('content', blog.Description);
+    head.appendChild(descriptionTag);
+
+    const imageTag = document.createElement('meta');
+    imageTag.setAttribute('property', 'og:image');
+    imageTag.setAttribute('content', blog.FeaturedImageUrl);
+    head.appendChild(imageTag);
+
+    const urlTag = document.createElement('meta');
+    urlTag.setAttribute('property', 'og:url');
+    urlTag.setAttribute('content', `https://localhost:7189/api/BlogPosts/${blog.Id}`);
+    head.appendChild(urlTag);
+
+    // Twitter Card tags
+    const twitterTitleTag = document.createElement('meta');
+    twitterTitleTag.setAttribute('name', 'twitter:title');
+    twitterTitleTag.setAttribute('content', blog.Title);
+    head.appendChild(twitterTitleTag);
+
+    const twitterDescriptionTag = document.createElement('meta');
+    twitterDescriptionTag.setAttribute('name', 'twitter:description');
+    twitterDescriptionTag.setAttribute('content', blog.Description);
+    head.appendChild(twitterDescriptionTag);
+
+    const twitterImageTag = document.createElement('meta');
+    twitterImageTag.setAttribute('name', 'twitter:image');
+    twitterImageTag.setAttribute('content', blog.FeaturedImageUrl);
+    head.appendChild(twitterImageTag);
+
+    const twitterCardTag = document.createElement('meta');
+    twitterCardTag.setAttribute('name', 'twitter:card');
+    twitterCardTag.setAttribute('content', 'summary_large_image'); 
+    head.appendChild(twitterCardTag);
   }
 
   closeContent() {
@@ -58,13 +107,12 @@ export class ExplorePageComponent {
       query: this.query,
       sortBy: this.sortBy,
       sortDirection: this.sortDirection,
-      pageNumber: this.pageNumber,
-      pageSize: this.pageSize
+      pageNumber: this.pageNumber.toString(), // Ensure these are strings
+      pageSize: this.pageSize.toString()
     };
 
     this.http.get<BlogData[]>("https://localhost:7189/api/BlogPosts", { params }).subscribe(
       (res: BlogData[]) => {
-        debugger;
         this.blogList = res;
         this.blogList.forEach(blog => {
           this.authorService.getAuthorName(blog.AuthorId).subscribe(author => {
@@ -74,6 +122,9 @@ export class ExplorePageComponent {
             blog.CategoryName = category.Name;
           });
         });
+      },
+      error => {
+        console.error('Error fetching blogs:', error);
       }
     );
   }
@@ -89,6 +140,7 @@ export class ExplorePageComponent {
       this.searchBlogs();
     }
   }
+  
   nextPage() {
     this.pageNumber++;
     this.searchBlogs();
@@ -98,52 +150,74 @@ export class ExplorePageComponent {
     return this.blogList.length === this.pageSize;
   }
 
-  loadCategories(){
-    debugger;
-    this.categoryService.getCategories().subscribe(categories=>{
-      debugger;
-      this.categories=categories;
+  loadCategories() {
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
     });
   }
 
-  filterByCategory(categoryId:number,categroyName:string){
-    // const params = {
-    //   selectedCategoryId : categoryId,
-    //   pageNumber : 1,
-      
-    //   query:categroyName,
-    // }
-    this.query = categroyName;
+  filterByCategory(categoryId: number, categoryName: string) {
+    this.query = categoryName;
     this.searchBlogs();
   }
 
   share(platform: string, blog: BlogData) {
-    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; // Replace with the actual blog URL
-    const title = blog.Title;
-    const description = blog.Description;
-  
+    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`;
+    const title = encodeURIComponent(blog.Title);
+    const description = encodeURIComponent(blog.Description);
+    const imageUrl = encodeURIComponent(blog.FeaturedImageUrl); // Blog featured image URL
+    const hashtags = 'Blogit'; // Modify as needed
+
     switch (platform) {
-      case 'facebook':
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-        break;
-        case 'instagram':
-          
-          window.open(`https://www.instagram.com/?url=${encodeURIComponent(url)}`, '_blank');
-          alert('Please copy the link and share it in your Instagram story or post.'); // Prompt user
-          break;
-      case 'linkedin':
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
-        break;
+        case 'twitter':
+            // Format the tweet text to include title, description, and image URL
+            const twitterText = `${title}%0A- ${description}%0A${url}`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}%0A&hashtags=${hashtags}`;
+            window.open(twitterUrl, '_blank');
+            break;
+
+        case 'share':
+            const shareText = `${title} - ${description} ${url} ${imageUrl}`; 
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: shareText,
+                    url: url,
+                })
+                .then(() => console.log('Shared successfully!'))
+                .catch((error) => {
+                    console.error('Error sharing:', error);
+                    this.toastr.warning('Sharing not supported in your browser');
+                });
+            } else {
+                this.toastr.warning('Sharing not supported in your browser');
+            }
+            break;
+
+        default:
+            this.copyToClipboard(blog.Id); // Ensure the URL is passed as a string
+            this.toastr.success('URL copied to clipboard! You can now paste it where you want to share.');
     }
-  }
-  
-  copyToClipboard(blog: BlogData) {
-    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; // Replace with the actual blog URL
+}
+
+
+  copyToClipboard(blogId: number) {
+    // Check if the blogId is valid
+    if (!blogId) {
+        alert('Blog ID is invalid.');
+        return;
+    }
+
+    const url = `https://localhost:7189/api/BlogPosts/${blogId}`;
+    console.log('Copying URL:', url); // Log the URL being copied
+
     navigator.clipboard.writeText(url).then(() => {
-      alert('Link copied to clipboard!');
+        this.toastr.success('Link Copied to clipbaord!')
     }).catch(err => {
-      console.error('Failed to copy: ', err);
+        console.error('Failed to copy: ', err);
     });
-  }
+}
+
+  
   
 }
