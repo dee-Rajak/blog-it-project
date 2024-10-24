@@ -39,6 +39,17 @@
   </div>
 </div>
 
+<div class="categry-ribbon">
+  <div class="categories">
+    <button class="category-button" (click)="filterByCategory(0,'')">
+      All
+        </button>
+    <button *ngFor="let category of categories" class="category-button" (click)="filterByCategory(category.Id,category.Name)">
+      {{category.Name}}
+    </button>
+  </div>
+</div>
+
 
 <div class="card-container">
   <div class="card" *ngFor="let blog of blogList" (click)="showContent(blog)">

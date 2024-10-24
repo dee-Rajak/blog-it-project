@@ -23,13 +23,14 @@ export class ExplorePageComponent {
   selectedBlog: any = null;
   blogList: BlogData[] = [];
   userId: any;
-
+  categories: any[] = [];
 
   query: string = '';
   sortBy: string = 'CreatedDate';
   sortDirection: string = 'Dsc';
   pageNumber: number = 1;
   pageSize: number = 3;
+  selectedCategoryId:number | null = null;
 
   constructor(private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){
     this.searchBlogs();
@@ -37,6 +38,7 @@ export class ExplorePageComponent {
 
   ngOnInit(): void {
     this.searchBlogs();
+    this.loadCategories();
     // this.getBlogs();
   }
 
@@ -94,6 +96,25 @@ export class ExplorePageComponent {
 
   hasMoreBlogs(): boolean {
     return this.blogList.length === this.pageSize;
+  }
+
+  loadCategories(){
+    debugger;
+    this.categoryService.getCategories().subscribe(categories=>{
+      debugger;
+      this.categories=categories;
+    });
+  }
+
+  filterByCategory(categoryId:number,categroyName:string){
+    // const params = {
+    //   selectedCategoryId : categoryId,
+    //   pageNumber : 1,
+      
+    //   query:categroyName,
+    // }
+    this.query = categroyName;
+    this.searchBlogs();
   }
 
   share(platform: string, blog: BlogData) {

@@ -18,4 +18,8 @@ export class CategoryService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
+  getCategoryPagination(){
+    return this.http.get<any[]>(`${this.apiUrl}/pageCategory`)
+  }
+
 }
