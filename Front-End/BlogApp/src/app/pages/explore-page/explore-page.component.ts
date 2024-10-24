@@ -11,6 +11,7 @@ import { CommentComponent } from '../../components/comment/comment.component';
 import { LikeComponent } from '../../components/like/like.component';
 import { CategoryService } from '../../services/category.service';
 import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-explore-page',
@@ -30,6 +31,7 @@ export class ExplorePageComponent implements OnInit {
   sortDirection: string = 'Dsc';
   pageNumber: number = 1;
   pageSize: number = 3;
+  selectedCategoryId: number | null = null;
   selectedCategoryId: number | null = null;
 
   constructor(private toastr: ToastrService, private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient) {
@@ -213,6 +215,8 @@ export class ExplorePageComponent implements OnInit {
 
     navigator.clipboard.writeText(url).then(() => {
         this.toastr.success('Link Copied to clipbaord!')
+      // alert('Link copied to clipboard!');
+      this.toastr.success("Link copied to clipboard");
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });
