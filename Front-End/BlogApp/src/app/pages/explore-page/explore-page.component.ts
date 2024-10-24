@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommentComponent } from '../../components/comment/comment.component';
 import { LikeComponent } from '../../components/like/like.component';
 import { CategoryService } from '../../services/category.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-explore-page',
@@ -30,9 +31,9 @@ export class ExplorePageComponent {
   sortDirection: string = 'Dsc';
   pageNumber: number = 1;
   pageSize: number = 3;
-  selectedCategoryId:number | null = null;
+  selectedCategoryId: number | null = null;
 
-  constructor(private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient){
+  constructor(private toastr: ToastrService, private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient) {
     this.searchBlogs();
   }
 
@@ -98,52 +99,48 @@ export class ExplorePageComponent {
     return this.blogList.length === this.pageSize;
   }
 
-  loadCategories(){
+  loadCategories() {
     debugger;
-    this.categoryService.getCategories().subscribe(categories=>{
+    this.categoryService.getCategories().subscribe(categories => {
       debugger;
-      this.categories=categories;
+      this.categories = categories;
     });
   }
 
-  filterByCategory(categoryId:number,categroyName:string){
-    // const params = {
-    //   selectedCategoryId : categoryId,
-    //   pageNumber : 1,
-      
-    //   query:categroyName,
-    // }
+  filterByCategory(categoryId: number, categroyName: string) {
     this.query = categroyName;
     this.searchBlogs();
   }
 
   share(platform: string, blog: BlogData) {
-    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; // Replace with the actual blog URL
+    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; 
     const title = blog.Title;
     const description = blog.Description;
-  
+
     switch (platform) {
       case 'facebook':
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
         break;
-        case 'instagram':
-          
-          window.open(`https://www.instagram.com/?url=${encodeURIComponent(url)}`, '_blank');
-          alert('Please copy the link and share it in your Instagram story or post.'); // Prompt user
-          break;
+      case 'instagram':
+
+        window.open(`https://www.instagram.com/?url=${encodeURIComponent(url)}`, '_blank');
+        // alert('Please copy the link and share it in your Instagram story or post.');
+        this.toastr.info("Please copy the link and share it in your Instagram story or post.");
+        break;
       case 'linkedin':
         window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
         break;
     }
   }
-  
+
   copyToClipboard(blog: BlogData) {
-    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`; // Replace with the actual blog URL
+    const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`;
     navigator.clipboard.writeText(url).then(() => {
-      alert('Link copied to clipboard!');
+      // alert('Link copied to clipboard!');
+      this.toastr.success("Link copied to clipboard");
     }).catch(err => {
       console.error('Failed to copy: ', err);
     });
   }
-  
+
 }
