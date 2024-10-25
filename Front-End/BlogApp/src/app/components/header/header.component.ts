@@ -31,18 +31,9 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.username = null;
+    debugger;
     this.router.navigateByUrl('home/explore');
   }
-
-  // deleteAccount() {
-  //   // alert("Are you sure about this ?");
-  //   this.authorService.delete(this.userId!).subscribe(
-  //     () => {
-  //       console.log(`Author Deleted Successfully`);
-  //       this.logout();
-  //     }
-  //   );
-  // }
 
   deleteAccount() {
     this.showDeleteConfirm = true;
@@ -58,7 +49,10 @@ export class HeaderComponent implements OnInit {
         console.log(`Author Deleted Successfully`);
         this.logout(); 
         this.showDeleteConfirm = false;
+        debugger;
+        this.router.navigateByUrl('home/explore');
       }
     );
+
   }
 }

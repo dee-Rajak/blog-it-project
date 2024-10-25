@@ -43,3 +43,33 @@ body::before {
     background-image: url("https://cdn.openart.ai/stable_diffusion/12e28aedc2bf10b91a7aa554a84bab1bccbc0b44_2000x2000.webp");
   }
 }
+
+
+.reader-mode{
+  background-color: #f4f4f4;
+  color:#333;
+}
+
+.reader-mode .navbar,
+.reader-mode .fotter,
+.reader-mode .sidebar{
+  display:none;
+}
+
+
+.reader-mode .content{
+  font-size: 1.25rem;
+  line-height: 1.75;
+  max-width: 800px;
+  margin: 0 auto;
+  padding:20px;
+}
+
+.reader-mode img{
+  max-width: 100%;
+}
+
+.reader-mode a{
+  color:#1a73e8;
+  text-decoration: underline;
+}

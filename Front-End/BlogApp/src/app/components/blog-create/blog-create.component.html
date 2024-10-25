@@ -1,3 +1,4 @@
+
 <div class="floating-card">
   <div class="d-flex justify-content-between">
     <h2>Create Blog</h2>
@@ -31,6 +32,7 @@
 
       <label for="featuredImageUrl">Featured Image URL</label>
       <input type="text" formControlName="featuredImageUrl" placeholder="Image URL" />
+      
       <div *ngIf="blogForm.controls['featuredImageUrl'].touched && blogForm.controls['featuredImageUrl'].invalid">
         <small *ngIf="blogForm.controls['featuredImageUrl'].errors?.['pattern']" class="text-danger">Please enter a
           valid URL.</small>
@@ -47,7 +49,7 @@
       </div>
 
 
-      <label for="content">Content (Markdown)</label>
+      <label for="content">Content</label>
       <div *ngIf="blogForm.controls['content'].touched && blogForm.controls['content'].invalid">
         <small *ngIf="blogForm.controls['content'].errors?.['required']" class="text-danger">Content is
           required.</small>
@@ -55,16 +57,30 @@
           50 characters long.</small>
       </div>
       <div class="content-section">
-        <!-- <textarea formControlName="content" placeholder="Write your markdown content here"></textarea> -->
-        <textarea formControlName="content" placeholder="Write your markdown content here"></textarea>
+        <div class="editor-container">
+          <quill-editor class="editor-container" formControlName="content"></quill-editor>
+        </div>
         <div class="preview">
-          <h4>Markdown Preview</h4>
-          <markdown [data]="blogForm.get('content')?.value"></markdown>
+          <h4>Preview</h4>
+          <div [innerHtml]="blogForm.get('content')?.value"></div>
         </div>
       </div>
+      
+      
+      
     </div>
+
+
+
+<!-- 
+<script>
+  const quill = new Quill('#editor', {
+    theme: 'snow'
+  }); -->
+<!-- </script> -->
     <div class="button-section">
       <button class="btn btn-primary" type="submit" [disabled]="blogForm.invalid">Publish</button>
     </div>
   </form>
 </div>
+

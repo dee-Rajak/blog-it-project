@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { Blog } from '../../models/blog.model';
@@ -9,11 +9,13 @@ import { AuthService } from '../../services/auth.service';
 import { Category } from '../../models/category.model';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
+import { QuillModule } from 'ngx-quill';
+
 
 @Component({
   selector: 'app-blog-create',
   standalone: true,
-  imports: [MarkdownModule, ReactiveFormsModule, CommonModule],
+  imports: [MarkdownModule, ReactiveFormsModule, CommonModule,QuillModule],
   templateUrl: './blog-create.component.html',
   styleUrl: './blog-create.component.css'
 })
@@ -73,6 +75,7 @@ export class BlogCreateComponent implements OnInit{
 
   onSubmit() {
     if (this.blogForm.valid) {
+      
       const blog = {
         Id: this.blogToEdit?.Id,
         Title: this.blogForm.value.title,
@@ -105,7 +108,11 @@ export class BlogCreateComponent implements OnInit{
     }
   }
 
+
+
   closeForm() {
     this.close.emit();
   }
+  
+  
 }
