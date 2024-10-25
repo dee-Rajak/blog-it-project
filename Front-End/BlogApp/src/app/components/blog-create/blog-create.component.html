@@ -56,6 +56,7 @@
         <small *ngIf="blogForm.controls['content'].errors?.['minlength']" class="text-danger">Content must be at least
           50 characters long.</small>
       </div>
+      
       <div class="content-section">
         <div class="editor-container">
           <quill-editor class="editor-container" formControlName="content"></quill-editor>

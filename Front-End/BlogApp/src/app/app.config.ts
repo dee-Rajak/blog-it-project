@@ -18,7 +18,19 @@ export const appConfig: ApplicationConfig = {
     provideMarkdown(),
     provideRouter(routes),
    importProvidersFrom(
-    QuillModule.forRoot()
+    QuillModule.forRoot({
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'], // Bold, Italic, Underline, Strikethrough
+          [{'list': 'ordered'}, {'list': 'bullet'}],  // Ordered and Bullet lists
+          ['code-block'],                // Blockquote and Code Block
+          ['clean'],                                   // Remove formatting                                // Remove formatting
+        ],
+        ImageResize: {},
+
+        imageDrop: true,
+      }
+    })
    ),
     provideToastr(),
     provideAnimations(),
