@@ -13,8 +13,8 @@ body {
   height: 100vh; /* Full height */
   background: linear-gradient(
     135deg,
-    rgba(255, 221, 204, 0.7),
-    rgba(204, 228, 255, 0.7)
+    rgba(99, 97, 96, 0.7),
+    rgba(88, 87, 86, 0.7)
   ); /* Base gradient */
   animation: waveAnimation 10s ease infinite; /* Wave animation */
   z-index: -1; /* Ensure it stays behind the content */
