@@ -31,8 +31,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.username = null;
-    debugger;
-    this.router.navigateByUrl('home/explore');
   }
 
   deleteAccount() {
@@ -47,10 +45,12 @@ export class HeaderComponent implements OnInit {
     this.authorService.delete(this.userId!).subscribe(
       () => {
         console.log(`Author Deleted Successfully`);
-        this.logout(); 
+        this.logout();
         this.showDeleteConfirm = false;
         debugger;
-        this.router.navigateByUrl('home/explore');
+        this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/home/explore']);
+        });
       }
     );
 
