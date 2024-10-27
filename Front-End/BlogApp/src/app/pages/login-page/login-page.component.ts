@@ -15,7 +15,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent {
+export class LoginPageComponent implements OnInit{
+  validationMessages: string[] = [];
 
   http = inject(HttpClient);
   router = inject(Router)
@@ -38,6 +39,60 @@ export class LoginPageComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.trackValidationChanges(this.authorForm);
+    this.trackValidationChanges(this.loginForm);
+  }
+
+  // Real-time tracking of validation messages
+  private trackValidationChanges(form: FormGroup): void {
+    form.statusChanges.subscribe(() => {
+      this.validationMessages = []; // Reset messages
+      this.gatherValidationMessages(form);
+    });
+  }
+
+  private gatherValidationMessages(form: FormGroup) {
+    Object.keys(form.controls).forEach((key) => {
+      const controlErrors = form.get(key)?.errors;
+      if (controlErrors) {
+        if (controlErrors['required']) {
+          this.validationMessages.push(`*${key} is required`);
+        }
+        if (controlErrors['minlength']) {
+          const requiredLength = controlErrors['minlength'].requiredLength;
+          this.validationMessages.push(`*${key} must be at least ${requiredLength} characters`);
+        }
+        if (controlErrors['pattern']) {
+          this.validationMessages.push(`*Please provide a valid ${key}`);
+        }
+      }
+    });
+  }
+
+  clearAlerts() {
+    this.validationMessages = []; // Clear alert messages
+  }
+
+  // Helper function to show toastr for each validation error
+  // showValidationErrors(form: FormGroup) {
+  //   Object.keys(form.controls).forEach((key) => {
+  //     const controlErrors = form.get(key)?.errors;
+  //     if (controlErrors) {
+  //       if (controlErrors['required']) {
+  //         this.toastr.warning(`${key} is required`, "Validation Warning", { timeOut: 3000 });
+  //       }
+  //       if (controlErrors['minlength']) {
+  //         const requiredLength = controlErrors['minlength'].requiredLength;
+  //         this.toastr.warning(`${key} must be at least ${requiredLength} characters`, "Validation Warning", { timeOut: 3000 });
+  //       }
+  //       if (controlErrors['email'] || controlErrors['pattern']) {
+  //         this.toastr.warning(`Please provide a valid ${key}`, "Validation Warning", { timeOut: 3000 });
+  //       }
+  //     }
+  //   });
+  // }
+
   navigateToDashboard() {
     this.router.navigateByUrl('/home/dashboard');
   }
@@ -54,6 +109,7 @@ export class LoginPageComponent {
             timeOut: 5000,
           });
           this.authorForm.reset();
+          this.clearAlerts();
         },
         error: (error) => {
           debugger;
@@ -83,6 +139,7 @@ export class LoginPageComponent {
           debugger;
           console.log('Login Successful');
           debugger;
+          this.clearAlerts();
           this.navigateToDashboard();
         },
         error: (error) => {
