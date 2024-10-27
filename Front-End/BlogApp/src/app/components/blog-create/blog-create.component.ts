@@ -32,13 +32,6 @@ export class BlogCreateComponent implements OnInit{
   }
 
   ngOnInit() {
-    // this.blogForm = new FormGroup({
-    //   title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : ''),
-    //   description: new FormControl(this.blogToEdit ? this.blogToEdit.Description : ''),
-    //   content: new FormControl(this.blogToEdit ? this.blogToEdit.Content : ''),
-    //   featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : ''),
-    //   categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '')
-    // });
     this.blogForm = new FormGroup({
       title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : '', [
         Validators.required,

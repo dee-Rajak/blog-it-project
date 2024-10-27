@@ -21,10 +21,11 @@ export const appConfig: ApplicationConfig = {
     QuillModule.forRoot({
       modules: {
         toolbar: [
-          ['bold', 'italic', 'underline', 'strike'], // Bold, Italic, Underline, Strikethrough
-          [{'list': 'ordered'}, {'list': 'bullet'}],  // Ordered and Bullet lists
-          ['code-block'],                // Blockquote and Code Block
-          ['clean'],                                   // Remove formatting                                // Remove formatting
+          [{ header: [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'], 
+          [{'list': 'ordered'}, {'list': 'bullet'}], 
+          ['code-block'], 
+          ['clean'],                
         ],
         ImageResize: {},
 
