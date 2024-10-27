@@ -15,13 +15,14 @@ import { CategoryService } from '../../services/category.service';
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.css'
 })
-export class DashboardPageComponent implements OnInit{
+export class DashboardPageComponent implements OnInit {
   userBlogs: any[] = [];
   blogToEdit: Blog | null = null;
   categoryList!: Category[];
+  confirmDelete: number | null = null;
 
-  constructor(private http: HttpClient, private categoryService: CategoryService, private authService: AuthService, private blogService: BlogService) {}
-  
+  constructor(private http: HttpClient, private categoryService: CategoryService, private authService: AuthService, private blogService: BlogService) { }
+
   ngOnInit() {
     this.fetchUserBlogs();
   }
@@ -39,16 +40,23 @@ export class DashboardPageComponent implements OnInit{
   }
 
   deleteBlog(blogId: number) {
-    debugger;
-    this.blogService.deleteBlog(blogId).subscribe(
-      () => {
-        debugger;
-        console.log(`Blog with ID ${blogId} deleted successfully`);
-        this.userBlogs = this.userBlogs.filter(blog => blog.Id !== blogId);
-      }
-    );
+    this.confirmDelete = blogId; // Set the blog to be deleted
   }
-  getCategories(){
+
+  confirmBlogDelete() {
+    if (this.confirmDelete !== null) {
+      this.blogService.deleteBlog(this.confirmDelete).subscribe(() => {
+        this.userBlogs = this.userBlogs.filter(blog => blog.Id !== this.confirmDelete);
+        this.confirmDelete = null;  // Reset after deletion
+      });
+    }
+  }
+
+  cancelDelete() {
+    this.confirmDelete = null;  // Reset if deletion is canceled
+  }
+
+  getCategories() {
     this.categoryService.getCategories().subscribe(
       (res: any) => {
         debugger;
