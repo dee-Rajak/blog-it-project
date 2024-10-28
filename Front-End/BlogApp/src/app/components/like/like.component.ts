@@ -16,17 +16,12 @@ export class LikeComponent implements OnInit {
 
   liked = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.checkIfLiked();
   }
 
-  // checkIfLiked() {
-  //   const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
-  //   debugger;
-  //   this.liked = likedPosts.includes(this.blogPostId);
-  // }
   checkIfLiked() {
     const url = `https://localhost:7189/api/BlogPosts/IsLiked?authorId=${this.authorId}&blogPostId=${this.blogPostId}`;
     debugger;
@@ -46,7 +41,6 @@ export class LikeComponent implements OnInit {
         () => {
           this.likes--;
           this.liked = false;
-          // this.updateLikedPosts();
           debugger;
           console.log('Blog unliked successfully');
         }
@@ -57,24 +51,10 @@ export class LikeComponent implements OnInit {
         () => {
           this.likes++;
           this.liked = true;
-          // this.updateLikedPosts();
           debugger;
           console.log('Blog liked successfully');
         }
       );
     }
   }
-
-  // updateLikedPosts() {
-  //   let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
-  //   if (this.liked) {
-  //     likedPosts.push(this.blogPostId);
-  //     debugger;
-  //   } else {
-  //     likedPosts = likedPosts.filter((id: number) => id !== this.blogPostId);
-  //     debugger;
-  //   }
-  //   localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
-  //   debugger;
-  // }
 }

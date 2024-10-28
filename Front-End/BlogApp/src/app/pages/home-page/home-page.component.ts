@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "../../components/header/header.component";
 import { AuthService } from '../../services/auth.service';
@@ -11,12 +11,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
-
-  ngOnInit(): void {
-    
-  }
+export class HomePageComponent {
+  constructor(private authService: AuthService, private router: Router) { }
 
   isLoggedIn(): boolean {
     return !!this.authService.getToken();

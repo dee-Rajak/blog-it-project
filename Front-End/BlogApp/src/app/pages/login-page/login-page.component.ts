@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
-export class LoginPageComponent implements OnInit{
+export class LoginPageComponent implements OnInit {
   validationMessages: string[] = [];
 
   http = inject(HttpClient);
@@ -28,14 +28,13 @@ export class LoginPageComponent implements OnInit{
     this.authorForm = new FormGroup(
       {
         Name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-        Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-        Password: new FormControl('', [Validators.required, Validators.minLength(8)])
+        Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9.]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+        Password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")])
       }
     );
     this.loginForm = new FormGroup({
-      Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-      // Password: new FormControl('', [Validators.required])
-      Password: new FormControl('', [Validators.required, Validators.minLength(8)])
+      Email: new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9.]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      Password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")])
     });
   }
 
@@ -64,7 +63,15 @@ export class LoginPageComponent implements OnInit{
           this.validationMessages.push(`*${key} must be at least ${requiredLength} characters`);
         }
         if (controlErrors['pattern']) {
-          this.validationMessages.push(`*Please provide a valid ${key}`);
+          if (key === 'Password') {
+            this.validationMessages.push(`*Password must include :`);
+            this.validationMessages.push(`  - uppercase letter,`);
+            this.validationMessages.push(`  - lowercase letter, `);
+            this.validationMessages.push(`  - number,`);
+            this.validationMessages.push(`  - special character`);
+          } else {
+            this.validationMessages.push(`*Please provide a valid ${key}`);
+          }
         }
       }
     });
@@ -73,25 +80,6 @@ export class LoginPageComponent implements OnInit{
   clearAlerts() {
     this.validationMessages = []; // Clear alert messages
   }
-
-  // Helper function to show toastr for each validation error
-  // showValidationErrors(form: FormGroup) {
-  //   Object.keys(form.controls).forEach((key) => {
-  //     const controlErrors = form.get(key)?.errors;
-  //     if (controlErrors) {
-  //       if (controlErrors['required']) {
-  //         this.toastr.warning(`${key} is required`, "Validation Warning", { timeOut: 3000 });
-  //       }
-  //       if (controlErrors['minlength']) {
-  //         const requiredLength = controlErrors['minlength'].requiredLength;
-  //         this.toastr.warning(`${key} must be at least ${requiredLength} characters`, "Validation Warning", { timeOut: 3000 });
-  //       }
-  //       if (controlErrors['email'] || controlErrors['pattern']) {
-  //         this.toastr.warning(`Please provide a valid ${key}`, "Validation Warning", { timeOut: 3000 });
-  //       }
-  //     }
-  //   });
-  // }
 
   navigateToDashboard() {
     this.router.navigateByUrl('/home/dashboard');
@@ -104,7 +92,6 @@ export class LoginPageComponent implements OnInit{
         next: (res: Author) => {
           debugger;
           console.log('Author registered successfully', res);
-          // alert("Registered Succesfully, Now Login");
           this.toastr.success("You may login now. 😊", "Registration Successfull", {
             timeOut: 5000,
           });
@@ -116,10 +103,6 @@ export class LoginPageComponent implements OnInit{
           this.toastr.error(error.error, "Registration Error", {
             timeOut: 5000,
           });
-          // alert(error.error);
-          // this.toastrService.error('everything is broken', 'Major Error', {
-          //   timeOut: 3000,
-          // });
         }
       });
     }
@@ -147,12 +130,10 @@ export class LoginPageComponent implements OnInit{
           this.toastr.error(error.error, "Login Error", {
             timeOut: 5000,
           });
-          // alert(error.error);
         }
       })
     }
   }
-
 }
 
 export interface AuthCredentials {
