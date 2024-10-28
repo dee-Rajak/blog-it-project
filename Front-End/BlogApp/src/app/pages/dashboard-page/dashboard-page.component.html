@@ -6,11 +6,7 @@
     <button class="create-button" (click)="openBlogForm()">
       <i class="bi bi-plus-circle"></i> Create Blog
     </button>
-    <app-blog-create
-      *ngIf="showBlogForm"
-      (click)="getCategories()"
-      (close)="closeBlogForm()"
-    ></app-blog-create>
+    <app-blog-create *ngIf="showBlogForm" (click)="getCategories()" (close)="closeBlogForm()"></app-blog-create>
   </div>
 </div>
 
@@ -39,11 +35,7 @@
       </tr>
     </tbody>
   </table>
-  <app-blog-create
-    *ngIf="blogToEdit"
-    [blogToEdit]="blogToEdit"
-    (close)="blogToEdit = null"
-  ></app-blog-create>
+  <app-blog-create *ngIf="blogToEdit" [blogToEdit]="blogToEdit" (close)="blogToEdit = null"></app-blog-create>
 </div>
 
 <!-- Confirmation Popup -->

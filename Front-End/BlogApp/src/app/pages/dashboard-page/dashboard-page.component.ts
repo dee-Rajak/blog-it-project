@@ -40,7 +40,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   deleteBlog(blogId: number) {
-    this.confirmDelete = blogId; // Set the blog to be deleted
+    this.confirmDelete = blogId;
   }
 
   confirmBlogDelete() {

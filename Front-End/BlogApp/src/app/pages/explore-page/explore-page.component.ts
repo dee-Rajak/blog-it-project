@@ -32,7 +32,7 @@ export class ExplorePageComponent implements OnInit {
   pageNumber: number = 1;
   pageSize: number = 6;
   selectedCategoryId: number | null = null;
-  
+
 
   constructor(private toastr: ToastrService, private blogService: BlogService, private categoryService: CategoryService, private authService: AuthService, private authorService: AuthorService, private http: HttpClient) {
     this.searchBlogs();
@@ -42,13 +42,6 @@ export class ExplorePageComponent implements OnInit {
     this.searchBlogs();
     this.loadCategories();
   }
-  ngAfterContentInit(): void {
-    //Called after ngOnInit when the component's or directive's content has been initialized.
-    //Add 'implements AfterContentInit' to the class.
-    this.searchBlogs();
-  }
-
-  
 
   showContent(blog: BlogData) {
     this.selectedBlog = blog;
@@ -102,7 +95,7 @@ export class ExplorePageComponent implements OnInit {
 
     const twitterCardTag = document.createElement('meta');
     twitterCardTag.setAttribute('name', 'twitter:card');
-    twitterCardTag.setAttribute('content', 'summary_large_image'); 
+    twitterCardTag.setAttribute('content', 'summary_large_image');
     head.appendChild(twitterCardTag);
   }
 
@@ -149,7 +142,7 @@ export class ExplorePageComponent implements OnInit {
       this.searchBlogs();
     }
   }
-  
+
   nextPage() {
     this.pageNumber++;
     this.searchBlogs();
@@ -174,61 +167,58 @@ export class ExplorePageComponent implements OnInit {
     const url = `https://localhost:7189/api/BlogPosts/${blog.Id}`;
     const title = encodeURIComponent(blog.Title);
     const description = encodeURIComponent(blog.Description);
-    const imageUrl = encodeURIComponent(blog.FeaturedImageUrl); // Blog featured image URL
-    const hashtags = 'Blogit'; // Modify as needed
+    const imageUrl = encodeURIComponent(blog.FeaturedImageUrl);
+    const hashtags = 'Blogit';
 
     switch (platform) {
-        case 'twitter':
-            // Format the tweet text to include title, description, and image URL
-            const twitterText = `${title}%0A- ${description}%0A${url}`;
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}%0A&hashtags=${hashtags}`;
-            window.open(twitterUrl, '_blank');
-            break;
+      case 'twitter':
+        // Format the tweet text to include title, description, and image URL
+        const twitterText = `${title}%0A- ${description}%0A${url}`;
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}%0A&hashtags=${hashtags}`;
+        window.open(twitterUrl, '_blank');
+        break;
 
-        case 'share':
-            const shareText = `${title} - ${description} ${url} ${imageUrl}`; 
-            if (navigator.share) {
-                navigator.share({
-                    title: title,
-                    text: shareText,
-                    url: url,
-                })
-                .then(() => console.log('Shared successfully!'))
-                .catch((error) => {
-                    console.error('Error sharing:', error);
-                    this.toastr.warning('Sharing not supported in your browser');
-                });
-            } else {
-                this.toastr.warning('Sharing not supported in your browser');
-            }
-            break;
+      case 'share':
+        const shareText = `${title} - ${description} ${url} ${imageUrl}`;
+        if (navigator.share) {
+          navigator.share({
+            title: title,
+            text: shareText,
+            url: url,
+          })
+            .then(() => console.log('Shared successfully!'))
+            .catch((error) => {
+              console.error('Error sharing:', error);
+              this.toastr.warning('Sharing not supported in your browser');
+            });
+        } else {
+          this.toastr.warning('Sharing not supported in your browser');
+        }
+        break;
 
-        default:
-            this.copyToClipboard(blog.Id); // Ensure the URL is passed as a string
-            // this.toastr.success('URL copied to clipboard! You can now paste it where you want to share.');
+      default:
+        this.copyToClipboard(blog.Id);
+        this.toastr.success('URL copied to clipboard! You can now paste it where you want to share.');
     }
-}
+  }
 
 
   copyToClipboard(blogId: number) {
-    // Check if the blogId is valid
     if (!blogId) {
-        alert('Blog ID is invalid.');
-        return;
+      alert('Blog ID is invalid.');
+      return;
     }
 
     const url = `https://localhost:7189/api/BlogPosts/${blogId}`;
-    console.log('Copying URL:', url); // Log the URL being copied
+    console.log('Copying URL:', url);
 
     navigator.clipboard.writeText(url).then(() => {
-        this.toastr.success('Link Copied to clipbaord!')
-      // alert('Link copied to clipboard!');
-      // this.toastr.success("Link copied to clipboard");
+      this.toastr.success('Link Copied to clipbaord!')
     }).catch(err => {
-        console.error('Failed to copy: ', err);
+      console.error('Failed to copy: ', err);
     });
-}
+  }
 
-  
-  
+
+
 }

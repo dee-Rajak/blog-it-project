@@ -1,28 +1,3 @@
-<!-- <div class="search-section mb-4">
-  <div class="filter-controls row justify-content-center align-items-center">
-    <div class="col-12 col-md-auto mb-2 mb-md-0">
-      <select class="filter-button form-control" [(ngModel)]="sortBy" (change)="searchBlogs()">
-        <option value="CreatedDate">Created Date</option>
-        <option value="Likes">Likes</option>
-        <option value="Title">Title</option>
-      </select>
-    </div>
-    <div class="col-12 col-md-auto mb-2 mb-md-0">
-      <input type="text" class="search-bar form-control" placeholder="Search blogs..." [(ngModel)]="query"
-        (input)="searchBlogs()" />
-    </div>
-    <div class="col-12 col-md-auto mb-2 mb-md-0">
-      <button class="search-button btn btn-primary w-100" (click)="searchBlogs()">Search</button>
-    </div>
-    <div class="col-12 col-md-auto">
-      <button class="filter-button btn btn-primary w-100" (click)="toggleSortDirection()">
-        Sort: <i class="bi"
-          [ngClass]="{'bi-sort-alpha-down': sortDirection === 'Asc', 'bi bi-sort-alpha-up': sortDirection !== 'Asc'}"></i>
-      </button>
-    </div>
-  </div>
-</div> -->
-
 <div class="search-section">
   <div class="filter-controls">
     <select class="select-filter" [(ngModel)]="sortBy" (change)="searchBlogs()">
@@ -34,7 +9,9 @@
     <button class="search-button" (click)="searchBlogs()">Search</button>
     <button class="filter-button" (click)="toggleSortDirection()">
       Sort
-      <i class="bi" [ngClass]="{'bi-sort-alpha-down': sortDirection === 'Asc', 'bi-sort-alpha-up': sortDirection !== 'Asc'}" class="sort-icon"></i>
+      <i class="bi"
+        [ngClass]="{'bi-sort-alpha-down': sortDirection === 'Asc', 'bi-sort-alpha-up': sortDirection !== 'Asc'}"
+        class="sort-icon"></i>
     </button>
   </div>
 </div>
@@ -43,8 +20,9 @@
   <div class="categories">
     <button class="category-button" (click)="filterByCategory(0,'')">
       All
-        </button>
-    <button *ngFor="let category of categories" class="category-button" (click)="filterByCategory(category.Id,category.Name)">
+    </button>
+    <button *ngFor="let category of categories" class="category-button"
+      (click)="filterByCategory(category.Id,category.Name)">
       {{category.Name}}
     </button>
   </div>
@@ -72,15 +50,7 @@
   </div>
 </div>
 
-<!-- <div class="pagination-controls d-flex justify-content-center mb-5">
-  <button class="pagination-button" (click)="previousPage()" [disabled]="pageNumber <= 1">
-    Previous
-  </button>
-  <span class="pagination-info">Page {{ pageNumber }}</span>
-  <button class="pagination-button" (click)="nextPage()" [disabled]="!hasMoreBlogs()">
-    Next
-  </button>
-</div> -->
+
 <div class="pagination-controls">
   <button class="pagination-button" (click)="previousPage()" [disabled]="pageNumber <= 1">
     Previous
@@ -130,23 +100,17 @@
       <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
       <div class="share-buttons">
         <button class="btn btn-outline-info me-2" (click)="share('twitter', selectedBlog)">
-            <i class="bi bi-twitter-x"></i>  <!-- Twitter icon -->
+          <i class="bi bi-twitter-x"></i> <!-- Twitter icon -->
         </button>
 
         <button class="btn btn-outline-primary me-2" (click)="share('share', selectedBlog)">
-          <i class="bi bi-share"></i>  <!-- Share icon -->
-      </button>
-        
-      <button class="btn btn-outline-secondary me-2" (click)="copyToClipboard(selectedBlog.Id)">
-        <i class="bi bi-clipboard"></i>
-    </button>
-    
-    
-        
-    </div>
-    
-      
+          <i class="bi bi-share"></i> <!-- Share icon -->
+        </button>
 
+        <button class="btn btn-outline-secondary me-2" (click)="copyToClipboard(selectedBlog.Id)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
