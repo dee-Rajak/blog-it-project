@@ -24,8 +24,12 @@ namespace BlogItAPI.Repositories.Implementations
         public async Task DeleteAuthorAsync(int id)
         {
             var author = await _context.Authors.FindAsync(id);
+            var authorLikes = await _context.Likes.Where(l=>l.AuthorId==id).ToListAsync();
+            var authorComments = await _context.Comments.Where(c=>c.CommentAuthorId == id).ToListAsync();
             if(author != null)
             {
+                _context.Likes.RemoveRange(authorLikes);
+                _context.Comments.RemoveRange(authorComments);
                 _context.Authors.Remove(author);
                 await _context.SaveChangesAsync();
             }
