@@ -1,31 +1,33 @@
-<div class="search-section mb-4">
-  <div class="filter-controls row justify-content-center align-items-center">
-    <div class="col-12 col-md-auto mb-2 mb-md-0">
-      <select class="filter-button form-control" [(ngModel)]="sortBy" (change)="searchBlogs()">
-        <option value="CreatedDate">Created Date</option>
-        <option value="Likes">Likes</option>
-        <option value="Title">Title</option>
-      </select>
-    </div>
-    <div class="col-12 col-md-auto mb-2 mb-md-0">
-      <input
-        type="text"
-        class="search-bar form-control"
-        placeholder="Search blogs..."
-        [(ngModel)]="query"
-        (input)="searchBlogs()"
-      />
-    </div>
-    <div class="col-12 col-md-auto mb-2 mb-md-0">
-      <button class="search-button btn btn-primary w-100" (click)="searchBlogs()">Search</button>
-    </div>
-    <div class="col-12 col-md-auto">
-      <button class="filter-button btn btn-primary w-100" (click)="toggleSortDirection()">
-        Sort: {{ sortDirection === "Asc" ? "Ascending" : "Descending" }}
-      </button>
-    </div>
+<div class="search-section">
+  <div class="filter-controls">
+    <select class="select-filter" [(ngModel)]="sortBy" (change)="searchBlogs()">
+      <option value="CreatedDate">Created Date</option>
+      <option value="Likes">Likes</option>
+      <option value="Title">Title</option>
+    </select>
+    <input type="text" class="search-bar" placeholder="Search blogs..." [(ngModel)]="query" (input)="searchBlogs()" />
+    <button class="search-button" (click)="searchBlogs()">Search</button>
+    <button class="filter-button" (click)="toggleSortDirection()">
+      Sort
+      <i class="bi"
+        [ngClass]="{'bi-sort-alpha-down': sortDirection === 'Asc', 'bi-sort-alpha-up': sortDirection !== 'Asc'}"
+        class="sort-icon"></i>
+    </button>
   </div>
 </div>
+
+<div class="categry-ribbon">
+  <div class="categories">
+    <button class="category-button" (click)="filterByCategory(0,'')">
+      All
+    </button>
+    <button *ngFor="let category of categories" class="category-button"
+      (click)="filterByCategory(category.Id,category.Name)">
+      {{category.Name}}
+    </button>
+  </div>
+</div>
+
 
 <div class="card-container">
   <div class="card" *ngFor="let blog of blogList" (click)="showContent(blog)">
@@ -33,9 +35,8 @@
     <div class="card-body">
       <h5 class="card-title">{{ blog.Title }}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{ blog.AuthorName }}</h6>
-      <span class="badge">{{blog.CategoryName}}</span>
+      <span class="badge badge-edit mb-2">{{blog.CategoryName}}</span>
       <div class="blog-stats">
-        <!-- <p>{{blog.CategoryName}}</p> -->
         <span class="like-count">
           <i class="bi bi-heart-fill"></i> {{ blog.LikeCount }}
         </span>
@@ -49,7 +50,8 @@
   </div>
 </div>
 
-<div class="pagination-controls d-flex justify-content-center mb-5">
+
+<div class="pagination-controls">
   <button class="pagination-button" (click)="previousPage()" [disabled]="pageNumber <= 1">
     Previous
   </button>
@@ -59,6 +61,9 @@
   </button>
 </div>
 
+
+
+<!-- Inside the floating card -->
 <div class="floating-card" *ngIf="selectedBlog">
   <div class="card-content">
     <div class="card-body row justify-content-between">
@@ -87,12 +92,25 @@
             <img [src]="selectedBlog.FeaturedImageUrl" class="img-fluid float-end me-3" alt="Featured Image"
               style="width: 300px;" />
           </div>
-          <markdown [data]="selectedBlog.Content"></markdown>
+          <div [innerHTML]="selectedBlog.Content"></div>
         </div>
       </div>
       <hr />
       <h3>Comments:</h3>
       <app-comment [blogPostId]="selectedBlog.Id"></app-comment>
+      <div class="share-buttons">
+        <button class="btn btn-outline-info me-2" (click)="share('twitter', selectedBlog)">
+          <i class="bi bi-twitter-x"></i> <!-- Twitter icon -->
+        </button>
+
+        <button class="btn btn-outline-primary me-2" (click)="share('share', selectedBlog)">
+          <i class="bi bi-share"></i> <!-- Share icon -->
+        </button>
+
+        <button class="btn btn-outline-secondary me-2" (click)="copyToClipboard(selectedBlog.Id)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>

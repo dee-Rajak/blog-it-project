@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 import { Blog } from '../../models/blog.model';
 import { BlogService } from '../../services/blog.service';
@@ -9,11 +9,13 @@ import { AuthService } from '../../services/auth.service';
 import { Category } from '../../models/category.model';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
+import { QuillModule } from 'ngx-quill';
+
 
 @Component({
   selector: 'app-blog-create',
   standalone: true,
-  imports: [MarkdownModule, ReactiveFormsModule, CommonModule],
+  imports: [MarkdownModule, ReactiveFormsModule, CommonModule,QuillModule],
   templateUrl: './blog-create.component.html',
   styleUrl: './blog-create.component.css'
 })
@@ -31,11 +33,26 @@ export class BlogCreateComponent implements OnInit{
 
   ngOnInit() {
     this.blogForm = new FormGroup({
-      title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : ''),
-      description: new FormControl(this.blogToEdit ? this.blogToEdit.Description : ''),
-      content: new FormControl(this.blogToEdit ? this.blogToEdit.Content : ''),
-      featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : ''),
-      categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '')
+      title: new FormControl(this.blogToEdit ? this.blogToEdit.Title : '', [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(100)
+      ]),
+      description: new FormControl(this.blogToEdit ? this.blogToEdit.Description : '', [
+        Validators.required,
+        Validators.minLength(20),
+        Validators.maxLength(300)
+      ]),
+      content: new FormControl(this.blogToEdit ? this.blogToEdit.Content : '', [
+        Validators.required,
+        Validators.minLength(50)
+      ]),
+      featuredImageUrl: new FormControl(this.blogToEdit ? this.blogToEdit.FeaturedImageUrl : '', [
+        Validators.pattern('https?://.+')
+      ]),
+      categoryId: new FormControl(this.blogToEdit ? this.blogToEdit.CategoryId : '', [
+        Validators.required
+      ])
     });
   }
 
@@ -51,6 +68,7 @@ export class BlogCreateComponent implements OnInit{
 
   onSubmit() {
     if (this.blogForm.valid) {
+      
       const blog = {
         Id: this.blogToEdit?.Id,
         Title: this.blogForm.value.title,
@@ -83,7 +101,11 @@ export class BlogCreateComponent implements OnInit{
     }
   }
 
+
+
   closeForm() {
     this.close.emit();
   }
+  
+  
 }

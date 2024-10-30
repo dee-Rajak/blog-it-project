@@ -6,11 +6,7 @@
     <button class="create-button" (click)="openBlogForm()">
       <i class="bi bi-plus-circle"></i> Create Blog
     </button>
-    <app-blog-create
-      *ngIf="showBlogForm"
-      (click)="getCategories()"
-      (close)="closeBlogForm()"
-    ></app-blog-create>
+    <app-blog-create *ngIf="showBlogForm" (click)="getCategories()" (close)="closeBlogForm()"></app-blog-create>
   </div>
 </div>
 
@@ -39,9 +35,14 @@
       </tr>
     </tbody>
   </table>
-  <app-blog-create
-    *ngIf="blogToEdit"
-    [blogToEdit]="blogToEdit"
-    (close)="blogToEdit = null"
-  ></app-blog-create>
+  <app-blog-create *ngIf="blogToEdit" [blogToEdit]="blogToEdit" (close)="blogToEdit = null"></app-blog-create>
+</div>
+
+<!-- Confirmation Popup -->
+<div *ngIf="confirmDelete" class="overlay" (click)="cancelDelete()"></div>
+
+<div *ngIf="confirmDelete" class="confirm-popup">
+  <p>Are you sure you want to delete this blog?</p>
+  <button class="btn btn-danger" (click)="confirmBlogDelete()">Confirm</button>
+  <button class="btn btn-secondary" (click)="cancelDelete()">Cancel</button>
 </div>

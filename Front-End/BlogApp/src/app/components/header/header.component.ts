@@ -11,13 +11,15 @@ import { AuthorService } from '../../services/author.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   username: string | null = null;
   userId: string | null = null;
 
-  constructor(private authorService: AuthorService, private authService: AuthService, private router: Router){}
+  showDeleteConfirm = false;
 
-  ngOnInit(){
+  constructor(private authorService: AuthorService, private authService: AuthService, private router: Router) { }
+
+  ngOnInit() {
     this.username = this.authService.getUserName();
     this.userId = this.authService.getUserId();
   }
@@ -29,16 +31,28 @@ export class HeaderComponent implements OnInit{
   logout() {
     this.authService.logout();
     this.username = null;
-    this.router.navigateByUrl('home/explore');
   }
-  
-  deleteAccount(){
-    alert("Are you sure about this ?");
+
+  deleteAccount() {
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+  }
+
+  confirmDeleteAccount() {
     this.authorService.delete(this.userId!).subscribe(
       () => {
         console.log(`Author Deleted Successfully`);
         this.logout();
+        this.showDeleteConfirm = false;
+        debugger;
+        this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/home/explore']);
+        });
       }
-    )
+    );
+
   }
 }

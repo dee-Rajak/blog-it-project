@@ -33,6 +33,9 @@ namespace BlogItAPI.Controllers
             if (await _context.Authors.AnyAsync(a => a.Email == author.Email))
             {
                 return BadRequest("Email already exists.");
+            } else if (await _context.Authors.AnyAsync(a=> a.Name == author.Name))
+            {
+                return BadRequest("Username already taken.");
             } else
             {
                 await _context.Authors.AddAsync(author);
@@ -67,7 +70,7 @@ namespace BlogItAPI.Controllers
 
             if (loggingAuthor == null)
             {
-                return BadRequest("Invalid Credentials");
+                return BadRequest("Wrong Password");
             }
 
             var token = GenerateJwtToken(loggingAuthor);

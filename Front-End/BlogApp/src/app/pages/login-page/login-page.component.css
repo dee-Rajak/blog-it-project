@@ -1,4 +1,4 @@
-.loginCard{
+/* .loginCard{
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -19,7 +19,51 @@
   ); 
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
+} */
+
+/* Style for the overall login card container */
+.loginCard {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Jost', sans-serif;
 }
+
+.alert-card {
+  width: 350px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #ffcccc;
+  color: #b30000;
+  text-align: left;
+  border-radius: 5px;
+  font-size: 0.85em;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-card ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.alert-card li {
+  margin-bottom: 3px;
+}
+
+.main {
+  width: 350px;
+  height: 500px;
+  background: linear-gradient(135deg, rgba(18, 113, 255, 0.7), rgba(221, 74, 255, 0.7));
+  border-radius: 10px;
+  box-shadow: 5px 20px 50px #000;
+  overflow: hidden;
+}
+
 #chk{
 	display: none;
 }

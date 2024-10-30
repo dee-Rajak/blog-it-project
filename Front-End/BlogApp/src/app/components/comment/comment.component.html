@@ -7,8 +7,8 @@
     </form>
   </div>
   <!-- <p>{{comments | json}}</p> -->
-  <div *ngFor="let comment of comments">
+  <div *ngFor="let comment of comments.slice().reverse()">
     <p>{{ comment.Content }}</p>
-    <small>By {{ comment.CommentAuthorName }} on {{ comment.CreadtedDate | date }}</small>
+    <small>By {{ comment.CommentAuthorName }} on {{ comment.CreadtedDate | date:'MMM d, y, h:mm a' }}</small>
   </div>
 </div>

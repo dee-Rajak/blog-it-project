@@ -39,30 +39,36 @@
 }
 
 .content-section {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
+  display: flex; /* Use flex to place elements side by side */
+  flex-direction: row; /* Row direction for side by side */
+  gap: 20px; /* Space between editor and preview */
   margin-top: 20px;
-  height: calc(100% - 60px);
+  height: 100%; /* Use 100% height to fill the parent */
 }
 
-.content-section textarea {
-  flex: 1;
-  min-height: 300px;
+.editor-container {
+  flex: 1; /* Allow the editor to grow and fill space */
+  display: flex;
+  flex-direction: column; /* Stack the ribbon and writing space */
+}
+
+#editor {
+  flex: 1; /* Allow the editor to grow and fill space */
+  min-height: 300px; /* Minimum height for the editor */
 }
 
 .preview {
-  flex: 1;
-  overflow-y: auto;
-  max-height: 300px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  flex: 1; /* Allow the preview to grow and fill space */
+  min-height: 300px; /* Minimum height for the preview */
+  border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+  padding: 10px; /* Optional: Add padding inside the preview */
+  overflow-y: auto; /* Add scroll if content exceeds height */
 }
 
-.preview h2 {
+.preview h4 {
   margin-bottom: 10px;
 }
+
 
 .button-section {
   display: flex;
